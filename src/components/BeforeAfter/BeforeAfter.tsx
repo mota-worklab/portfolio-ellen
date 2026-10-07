@@ -80,7 +80,7 @@ export function BeforeAfter({ before, after, demo = false }: BeforeAfterProps) {
           aria-valuenow={Math.round(pos)}
           aria-valuetext={`${Math.round(pos)}% antes, ${Math.round(100 - pos)}% depois`}
           onKeyDown={onKey}
-          className={`pointer-events-auto absolute left-1/2 top-1/2 grid size-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-white bg-ink/40 font-mono text-[10px] uppercase tracking-[0.14em] backdrop-blur transition-transform ${dragging ? "scale-90" : ""}`}
+          className={`pointer-events-auto absolute left-1/2 top-1/2 grid size-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-white bg-ink/40 font-mono text-[10px] uppercase tracking-[0.05em] backdrop-blur transition-transform ${dragging ? "scale-90" : ""}`}
         >
           <span aria-hidden="true">◂ ▸</span>
         </div>

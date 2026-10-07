@@ -63,7 +63,7 @@ export function Showreel() {
           />
         </div>
         <span className="absolute inset-0 grid place-items-center pointer-fine:hidden" aria-hidden="true">
-          <span className="flex size-20 items-center justify-center gap-1.5 rounded-full bg-accent font-mono text-[11px] uppercase tracking-[0.14em] text-ink">
+          <span className="flex size-20 items-center justify-center gap-1.5 rounded-full bg-accent font-mono text-[11px] uppercase tracking-[0.05em] text-ink">
             Assistir <Play size={11} fill="currentColor" />
           </span>
         </span>

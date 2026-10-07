@@ -32,7 +32,7 @@ export function EditTimeline() {
         <div className="mt-2 flex flex-col gap-1.5">
           {TRACKS.map((track) => (
             <div key={track.name} className="flex items-center gap-2">
-              <span className="w-14 shrink-0 font-mono text-[9px] uppercase tracking-wider text-white/45 sm:w-22">{track.name}</span>
+              <span className="w-14 shrink-0 font-mono text-[9px] uppercase tracking-[0.05em] text-white/45 sm:w-22">{track.name}</span>
               <div className="relative h-5 flex-1 bg-white/[0.03] sm:h-7">
                 {track.clips.map(([start, width]) => (
                   <span

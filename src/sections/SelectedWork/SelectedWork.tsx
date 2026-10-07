@@ -62,7 +62,7 @@ export function SelectedWork() {
               type="button"
               aria-pressed={filter === item.value}
               onClick={() => { setFilter(item.value); setLimit(8); }}
-              className={`min-h-11 rounded-lg border px-4 font-mono text-[10px] tracking-wide transition-colors ${filter === item.value ? "border-white bg-white text-ink" : "border-line text-mute hover:border-white/50 hover:text-white"}`}
+              className={`min-h-11 rounded-lg border px-4 font-mono text-[10px] tracking-[0.05em] transition-colors ${filter === item.value ? "border-white bg-white text-ink" : "border-line text-mute hover:border-white/50 hover:text-white"}`}
             >
               {item.label}
             </button>
@@ -103,7 +103,7 @@ export function SelectedWork() {
 
       {shown < filtered.length && (
         <div className="mt-16 flex justify-center">
-          <button type="button" onClick={() => setLimit((value) => value + 8)} className="min-h-12 rounded-lg border border-line px-8 font-mono text-xs tracking-wide transition-colors hover:border-accent hover:text-accent">
+          <button type="button" onClick={() => setLimit((value) => value + 8)} className="min-h-12 rounded-lg border border-line px-8 font-mono text-xs tracking-[0.05em] transition-colors hover:border-accent hover:text-accent">
             Mostrar mais trabalhos ({filtered.length - shown})
           </button>
         </div>

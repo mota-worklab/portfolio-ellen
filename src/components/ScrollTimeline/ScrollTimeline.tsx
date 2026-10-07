@@ -61,16 +61,29 @@ export function ScrollTimeline() {
   return (
     <nav
       aria-label="Linha do tempo da página"
-      className="gutter pointer-events-none fixed inset-x-0 bottom-0 z-40 bg-gradient-to-t from-ink/90 to-transparent pb-3 pt-6 opacity-80 transition-opacity duration-300 hover:opacity-100 sm:pb-4"
+      className="gutter pointer-events-none fixed inset-x-0 bottom-3 z-40 sm:bottom-5"
     >
-      <div className="pointer-events-auto flex items-center gap-3 font-mono text-[10px] tracking-[0.055em] text-white/60 sm:gap-5">
-        <span ref={tcRef} className="tabular-nums text-white" aria-hidden="true">
+      <div className="pointer-events-auto mx-auto flex max-w-6xl items-center gap-3 rounded-xl border border-white/15 bg-ink/85 px-3 py-2.5 font-mono text-[10px] tracking-[0.05em] text-white/55 shadow-[0_12px_45px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:gap-4 sm:px-4">
+        <div className="flex shrink-0 items-center gap-2.5 border-r border-white/10 pr-3 sm:pr-4">
+          <span className="grid size-7 place-items-center rounded-full bg-accent text-ink" aria-hidden="true">
+            <svg width="9" height="10" viewBox="0 0 9 10" fill="currentColor">
+              <path d="M8.2 4.15a1 1 0 0 1 0 1.7L1.55 9.92A1 1 0 0 1 0 9.07V.93A1 1 0 0 1 1.55.08L8.2 4.15Z" />
+            </svg>
+          </span>
+          <div className="min-w-[5.5rem] leading-tight">
+            <span className="mb-1 block text-[8px] uppercase text-white/35">Reproduzindo</span>
+            <span className="block truncate text-white/90">{chapters[current]?.label}</span>
+          </div>
+        </div>
+
+        <span ref={tcRef} className="hidden min-w-[5.5rem] tabular-nums text-white sm:inline" aria-hidden="true">
           00:00:00:00
         </span>
 
-        <div className="relative h-8 flex-1">
-          <div className="absolute inset-x-0 top-1/2 h-px bg-white/20" />
-          <div ref={fillRef} className="absolute left-0 top-1/2 h-px w-0 bg-white/70" />
+        <div className="relative h-9 min-w-0 flex-1">
+          <div className="absolute inset-x-0 top-1/2 h-1 -translate-y-1/2 overflow-hidden rounded-full bg-white/10">
+            <div ref={fillRef} className="h-full w-0 rounded-full bg-accent" />
+          </div>
           {marks.map((m, i) => {
             const chapter = chapters[i];
             return (
@@ -78,22 +91,22 @@ export function ScrollTimeline() {
                 key={chapter.id}
                 type="button"
                 onClick={() => scrollToTarget(lenis, `#${chapter.id}`)}
-                className={`absolute top-0 flex h-full -translate-x-px items-start gap-1.5 pt-0 transition-colors hover:text-white ${current === i ? "text-white" : ""}`}
+                className={`group absolute top-0 flex h-full -translate-x-1/2 items-start justify-center transition-colors hover:text-white ${current === i ? "text-white" : "text-white/35"}`}
                 style={{ left: `${m * 100}%` }}
                 aria-label={`Ir para ${chapter.label}`}
                 aria-current={current === i ? "true" : undefined}
               >
-                <span className="mt-[11px] block h-2.5 w-px bg-current" />
-                <span className="hidden leading-none md:block">{chapter.label}</span>
+                <span className={`mt-[14px] block rounded-full border border-ink transition-all group-hover:scale-125 ${current === i ? "size-2.5 bg-accent" : "size-2 bg-white/65"}`} />
+                <span className="sr-only">{chapter.label}</span>
               </button>
             );
           })}
           <div ref={headRef} className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2" aria-hidden="true">
-            <div className="size-2 rounded-full bg-accent" />
+            <div className="size-3 rounded-full border-[3px] border-ink bg-white shadow-[0_0_0_1px_rgba(255,255,255,0.35)]" />
           </div>
         </div>
 
-        <span className="hidden tabular-nums sm:inline" aria-hidden="true">
+        <span className="hidden shrink-0 tabular-nums text-white/40 md:inline" aria-hidden="true">
           {toTimecode(pageDuration)}
         </span>
       </div>

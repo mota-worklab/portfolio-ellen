@@ -79,7 +79,7 @@ export function CustomCursor() {
       >
         {mode === "link" && <ArrowRight size={16} strokeWidth={1.5} />}
         {labelled && (
-          <span className="flex items-center gap-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.14em]">
+          <span className="flex items-center gap-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.05em]">
             {mode === "view" && "Ver"}
             {mode === "play" && (
               <>

@@ -25,7 +25,7 @@ export function FramePlaceholder({ label, hint, tone = "neutral", className = ""
       )}
       <div className="absolute left-1/2 top-1/2 h-px w-10 -translate-x-1/2 bg-current opacity-40" />
       <div className="absolute left-1/2 top-1/2 h-10 w-px -translate-y-1/2 bg-current opacity-40" />
-      <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 font-mono text-[10px] uppercase tracking-[0.14em]">
+      <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 font-mono text-[10px] uppercase tracking-[0.05em]">
         <span>{label}</span>
         {import.meta.env.DEV && hint && <span className="hidden text-right opacity-60 sm:block">{hint}</span>}
       </div>
