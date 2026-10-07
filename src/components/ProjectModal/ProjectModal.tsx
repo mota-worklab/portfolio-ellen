@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink, X } from "lucide-react";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import type { Project } from "../../data/projects";
 import { gsap } from "../../lib/gsap";
@@ -17,7 +17,7 @@ interface ProjectModalProps {
 
 export function ProjectModal({ projects, index, onNavigate, onClose }: ProjectModalProps) {
   return (
-    <Overlay label={`Projeto: ${projects[index].title}`} onClose={onClose} scrollable={false}>
+    <Overlay label={`Projeto: ${projects[index].title}`} onClose={onClose}>
       {(close) => <ProjectView projects={projects} index={index} onNavigate={onNavigate} onClose={close} />}
     </Overlay>
   );
@@ -31,9 +31,11 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
   const prev = (index - 1 + total) % total;
   const next = (index + 1) % total;
   const number = String(index + 1).padStart(2, "0");
+  const portrait = project.format === "vertical";
 
   // Troca de projeto: corte seco com um flash curto do conteúdo, como um jump cut.
   useLayoutEffect(() => {
+    root.current?.closest('[role="dialog"]')?.scrollTo(0, 0);
     if (reduced) return;
     const ctx = gsap.context(() => {
       gsap.from("[data-pv-item]", { y: 30, opacity: 0, stagger: 0.05, duration: 0.8 });
@@ -53,8 +55,8 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
   }, [next, prev, onNavigate]);
 
   return (
-    <div ref={root} className="gutter flex h-full min-h-0 flex-col gap-3 py-3 sm:gap-4 sm:py-5">
-      <header className="flex shrink-0 items-center justify-between gap-4">
+    <div ref={root} className="gutter mx-auto flex min-h-dvh w-full max-w-[110rem] flex-col gap-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-[max(0.75rem,env(safe-area-inset-top))] sm:gap-5 sm:py-5">
+      <header className="flex items-center justify-between gap-4 border-b border-line pb-2">
         <p className="label !text-white">
           Projeto {number} <span className="text-white/40">/ {String(total).padStart(2, "0")}</span>
         </p>
@@ -63,23 +65,21 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
         </button>
       </header>
 
-      <div data-pv-item className="relative min-h-0 flex-1 overflow-hidden bg-black" key={project.id}>
-        {project.embedUrl ? (
-          <div className="h-full w-full">
+      <div data-pv-item className="flex min-h-0 flex-1 items-center justify-center" key={project.id}>
+        <div className={`relative w-full overflow-hidden rounded-lg bg-black ${portrait ? "aspect-[9/16] max-w-[max(9rem,calc(56.25dvh_-_6.75rem))]" : "aspect-video max-w-[max(16rem,calc(177.78dvh_-_23.11rem))]"}`}>
+          {project.embedUrl ? (
             <iframe
               key={project.embedUrl}
               src={project.embedUrl}
               title={`Assistir ${project.title}`}
-              className="h-full w-full border-0"
+              className="absolute inset-0 h-full w-full border-0"
               allow="autoplay; fullscreen; picture-in-picture"
               allowFullScreen
               referrerPolicy="strict-origin-when-cross-origin"
             />
-          </div>
-        ) : hasVideo(project.video) ? (
-          <VideoPlayer source={project.video} title={project.title} format={project.format} fitContainer />
-        ) : (
-          <div className="relative h-full overflow-hidden bg-ink-3">
+          ) : hasVideo(project.video) ? (
+            <VideoPlayer source={project.video} title={project.title} format={project.format} fitContainer />
+          ) : (
             <LazyVideo
               source={project.preview}
               image={project.thumbnail}
@@ -87,8 +87,8 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
               eager
               placeholder={{ label: `${number} — ${project.title}`, hint: "src/data/projects.ts → video" }}
             />
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
       <div className="grid shrink-0 grid-cols-12 gap-x-4 gap-y-2 sm:gap-x-6">
@@ -122,13 +122,18 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
         )}
       </div>
 
-      <nav aria-label="Navegação entre projetos" className="grid shrink-0 grid-cols-2 gap-4 border-t border-line pt-1.5 sm:pt-2">
-        <button type="button" onClick={() => onNavigate(prev)} className="group flex min-h-11 flex-col items-start justify-center text-left">
+      <nav aria-label="Navegação entre projetos" className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 border-t border-line pt-2 sm:gap-4">
+        <button type="button" onClick={() => onNavigate(prev)} className="group flex min-h-11 min-w-0 flex-col items-start justify-center text-left">
           <span className="label flex items-center gap-2 group-hover:!text-accent">
             <ArrowLeft size={12} aria-hidden="true" /> Anterior
           </span>
         </button>
-        <button type="button" onClick={() => onNavigate(next)} className="group flex min-h-11 flex-col items-end justify-center text-right">
+        {project.embedUrl ? (
+          <a href={project.embedUrl} target="_blank" rel="noopener noreferrer" className="label flex min-h-11 items-center gap-2 text-center hover:!text-accent" aria-label={`Abrir ${project.title} em nova aba`}>
+            Abrir vídeo <ExternalLink size={12} aria-hidden="true" />
+          </a>
+        ) : <span />}
+        <button type="button" onClick={() => onNavigate(next)} className="group flex min-h-11 min-w-0 flex-col items-end justify-center text-right">
           <span className="label flex items-center gap-2 group-hover:!text-accent">
             Próximo <ArrowRight size={12} aria-hidden="true" />
           </span>

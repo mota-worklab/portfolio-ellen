@@ -41,8 +41,9 @@ export function VideoPlayer({ source, title, format = "horizontal", autoPlay = f
   const toggleFullscreen = () => {
     const el = wrapRef.current;
     if (!el) return;
-    if (document.fullscreenElement) document.exitFullscreen();
-    else el.requestFullscreen?.().catch(() => {});
+    if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+    else if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+    else (videoRef.current as HTMLVideoElement & { webkitEnterFullscreen?: () => void } | null)?.webkitEnterFullscreen?.();
   };
 
   useEffect(() => {
@@ -108,8 +109,9 @@ export function VideoPlayer({ source, title, format = "horizontal", autoPlay = f
   return (
     <div
       ref={wrapRef}
-      className={`group relative w-full overflow-hidden bg-black ${fullscreen || fitContainer ? "h-full" : portrait ? "mx-auto aspect-[9/16] max-w-sm" : "aspect-video"} ${hideUi ? "cursor-none" : ""} ${className}`}
+      className={`group relative w-full overflow-hidden bg-black ${fullscreen || fitContainer ? "h-full" : portrait ? "mx-auto aspect-[9/16] max-w-sm" : "aspect-video"} ${hideUi ? "pointer-fine:cursor-none" : ""} ${className}`}
       onPointerMove={wake}
+      onPointerDown={wake}
       onKeyDown={onKey}
     >
       <video
@@ -132,7 +134,7 @@ export function VideoPlayer({ source, title, format = "horizontal", autoPlay = f
       </video>
 
       <div
-        className={`absolute inset-x-0 bottom-0 flex items-center ${portrait ? "gap-2 px-2" : "gap-4 px-4 sm:px-6"} bg-gradient-to-t from-black/80 to-transparent pb-4 pt-12 transition-opacity duration-500 ${hideUi ? "opacity-0" : "opacity-100"}`}
+        className={`absolute inset-x-0 bottom-0 flex items-center gap-1 px-2 bg-gradient-to-t from-black/80 to-transparent pb-2 pt-10 transition-opacity duration-300 sm:gap-3 sm:px-5 sm:pb-4 sm:pt-12 ${hideUi ? "pointer-fine:opacity-0" : "opacity-100"}`}
       >
         <button
           type="button"
@@ -143,7 +145,7 @@ export function VideoPlayer({ source, title, format = "horizontal", autoPlay = f
           {playing ? <Pause size={16} /> : <Play size={16} />}
         </button>
 
-        <span className="font-mono text-[11px] tabular-nums text-white/70">{toClock(time)}</span>
+        <span className={`${portrait ? "hidden sm:inline" : ""} font-mono text-[11px] tabular-nums text-white/70`}>{toClock(time)}</span>
 
         <div
           role="slider"
@@ -153,7 +155,7 @@ export function VideoPlayer({ source, title, format = "horizontal", autoPlay = f
           aria-valuemax={Math.round(duration)}
           aria-valuenow={Math.round(time)}
           aria-valuetext={`${toClock(time)} de ${toClock(duration)}`}
-          className="group/bar relative flex h-11 flex-1 cursor-pointer items-center"
+          className="group/bar relative flex h-11 min-w-0 flex-1 cursor-pointer items-center"
           onPointerDown={(e) => {
             e.currentTarget.setPointerCapture(e.pointerId);
             scrub(e);
@@ -170,7 +172,7 @@ export function VideoPlayer({ source, title, format = "horizontal", autoPlay = f
           <div className="absolute top-1/2 size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent" style={{ left: `${progress}%` }} />
         </div>
 
-        <span className={`${portrait ? "hidden" : ""} font-mono text-[11px] tabular-nums text-white/40`}>{toClock(duration)}</span>
+        <span className={`${portrait ? "hidden" : "hidden sm:inline"} font-mono text-[11px] tabular-nums text-white/40`}>{toClock(duration)}</span>
 
         <button
           type="button"
@@ -183,7 +185,7 @@ export function VideoPlayer({ source, title, format = "horizontal", autoPlay = f
         <button
           type="button"
           onClick={toggleFullscreen}
-          className="hidden size-11 shrink-0 place-items-center hover:text-accent sm:grid"
+          className="grid size-11 shrink-0 place-items-center hover:text-accent"
           aria-label={fullscreen ? "Sair da tela cheia" : "Tela cheia"}
         >
           {fullscreen ? <Minimize size={16} /> : <Maximize size={16} />}

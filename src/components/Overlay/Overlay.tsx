@@ -56,7 +56,8 @@ export function Overlay({ label, onClose, children, scrollable = true }: Overlay
       role="dialog"
       aria-modal="true"
       aria-label={label}
-      className={`fixed inset-0 z-[80] overscroll-contain bg-ink ${scrollable ? "overflow-y-auto" : "overflow-hidden"}`}
+      className={`fixed inset-0 z-[80] overscroll-contain bg-ink ${scrollable ? "overflow-x-hidden overflow-y-auto" : "overflow-hidden"}`}
+      style={{ WebkitOverflowScrolling: "touch" }}
       data-lenis-prevent
     >
       <div data-overlay-content className={scrollable ? undefined : "h-full min-h-0"}>{children(close)}</div>

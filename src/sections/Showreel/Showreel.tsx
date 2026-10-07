@@ -77,10 +77,10 @@ export function Showreel() {
       </div>
 
       {open && (
-        <Overlay label="Showreel" onClose={() => setOpen(false)} scrollable={false}>
+        <Overlay label="Showreel" onClose={() => setOpen(false)}>
           {(close) => (
-            <div className="gutter flex h-full min-h-0 flex-col gap-3 py-3 sm:gap-4 sm:py-5">
-              <div className="flex shrink-0 items-center justify-between">
+            <div className="gutter mx-auto flex min-h-dvh w-full max-w-[110rem] flex-col gap-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-[max(0.75rem,env(safe-area-inset-top))] sm:gap-5 sm:py-5">
+              <div className="flex items-center justify-between gap-4 border-b border-line pb-2">
                 <p className="label !text-white">Showreel — {year}</p>
                 <button
                   type="button"
@@ -91,8 +91,10 @@ export function Showreel() {
                   Fechar <span className="text-white/40">ESC</span> <X size={14} aria-hidden="true" />
                 </button>
               </div>
-              <div className="min-h-0 flex-1">
-                <VideoPlayer source={showreel.video} title="Showreel" autoPlay fitContainer placeholderHint="src/config/site.ts → showreel.video" />
+              <div className="flex min-h-0 flex-1 items-center justify-center">
+                <div className="aspect-video w-full max-w-[max(16rem,calc(177.78dvh_-_14.22rem))] overflow-hidden rounded-lg bg-black">
+                  <VideoPlayer source={showreel.video} title="Showreel" autoPlay fitContainer placeholderHint="src/config/site.ts → showreel.video" />
+                </div>
               </div>
             </div>
           )}
