@@ -14,7 +14,7 @@ const RULER = ["00:00", "00:05", "00:10", "00:15", "00:20", "00:25"];
  */
 export function EditTimeline() {
   return (
-    <figure className="mt-8 border border-line bg-ink-2 p-3 sm:p-5" aria-label="Ilustração de uma timeline de edição">
+    <figure className="mt-8 rounded-xl border border-line bg-ink-2 p-3 sm:p-5" aria-label="Ilustração de uma timeline de edição">
       <div className="mb-3 flex items-center justify-between">
         <span className="label">Sequência 01 — Final</span>
         <span data-playhead-tc className="font-mono text-[11px] tabular-nums text-accent">

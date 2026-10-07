@@ -88,9 +88,11 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
           <h2 data-pv-item className="display text-[clamp(2.25rem,4.6vw,4.75rem)]">
             {project.title}
           </h2>
-          <p data-pv-item className="mt-8 max-w-xl text-base leading-relaxed sm:text-[1.0625rem] text-white/80">
-            {project.description}
-          </p>
+          {project.description && (
+            <p data-pv-item className="mt-8 max-w-xl text-base leading-relaxed text-white/80 sm:text-[1.0625rem]">
+              {project.description}
+            </p>
+          )}
         </div>
 
         <dl data-pv-item className="col-span-12 grid grid-cols-2 content-start gap-8 border-t border-line pt-6 lg:col-span-4 lg:col-start-9">

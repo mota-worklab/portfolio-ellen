@@ -52,7 +52,7 @@ export function Showreel() {
         data-reel-frame
         data-cursor="play"
         onClick={() => setOpen(true)}
-        className="group relative block aspect-video w-full overflow-hidden bg-ink-3"
+        className="group relative block aspect-video w-full overflow-hidden rounded-2xl bg-ink-3"
         aria-label="Assistir showreel"
       >
         <div data-reel-media className="absolute inset-0 transition-[filter] duration-700 group-hover:brightness-110">
@@ -70,9 +70,9 @@ export function Showreel() {
       </button>
 
       <div data-reel-meta className="mt-5 flex items-center justify-between">
-        <p className="label">{showreel.demo ? "Vídeo de exemplo · Tears of Steel" : `Cortes selecionados — ${year}`}</p>
+        <p className="label">Showreel — {year}</p>
         <p className="label flex items-center gap-2">
-          <span className="size-1.5 rounded-full bg-accent" aria-hidden="true" /> {showreel.demo ? "Demonstração" : "Com som"}
+          <span className="size-1.5 rounded-full bg-accent" aria-hidden="true" /> Assistir
         </p>
       </div>
 

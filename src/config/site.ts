@@ -74,7 +74,7 @@ export const site = {
 
     /** Texto sobre você. Cada item do array vira um parágrafo. */
     bio: [
-      "Sou Ellen Dumont, editora de vídeo, publicitária e filmmaker nas horas vagas. Há pouco mais de 3 anos no audiovisual, edito vídeos institucionais, depoimentos, aftermovies de eventos e conteúdos para YouTube — sempre para prender a atenção e cumprir seu propósito.",
+      "Sou Ellen Dumont, editora de vídeo, publicitária e filmmaker nas horas vagas. Há pouco mais de 3 anos no audiovisual, edito vídeos institucionais, depoimentos, aftermovies de eventos e conteúdos para YouTube sempre para prender a atenção e cumprir seu propósito.",
       "Também atuo na captação, o que me dá uma visão clara do que o material precisa para funcionar, mas meu foco é a pós-produção. O color grading é estudo constante: acredito que a cor constrói a atmosfera e a identidade de um projeto.",
       "Formada em Publicidade e Propaganda, uno estratégia de comunicação e narrativa visual. Busca uma edição com identidade, ritmo e narrativa sólida? Vamos conversar.",
     ],

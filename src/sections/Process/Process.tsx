@@ -77,8 +77,7 @@ export function Process() {
         <h2 id="process-title" data-process-title className="display text-[clamp(2.25rem,4.6vw,4.75rem)] lg:col-span-8">
           Processo
         </h2>
-        <p className="max-w-sm self-end text-mute lg:col-span-4">Da primeira ideia ao export final — cada corte tem um motivo.</p>
-      </div>
+       </div>
 
       <ol data-steps className="relative ml-1 lg:ml-[8.333%]">
         <span className="absolute bottom-0 left-0 top-0 w-px bg-line" aria-hidden="true" />

@@ -31,11 +31,7 @@ export function BeforeAfterSection() {
           Depois
         </h2>
         <div className="flex flex-col justify-end gap-3 lg:col-span-4">
-          <p data-ba-meta className="max-w-sm text-mute">
-            {beforeAfter.demo
-              ? "Arraste o divisor para explorar uma simulação de contraste e saturação no mesmo vídeo de exemplo."
-              : "Mesmo plano, mesmo frame. Arraste o divisor para ver o que a edição e a cor fazem com o material bruto."}
-          </p>
+          <p data-ba-meta className="max-w-sm text-mute">Mesmo plano, mesmo frame. Arraste o divisor para ver o que a edição e a cor fazem com o material bruto.</p>
           <p data-ba-meta className="label">{beforeAfter.caption}</p>
         </div>
       </div>
@@ -45,11 +41,11 @@ export function BeforeAfterSection() {
       </div>
 
       <div data-ba-meta className="mt-5 flex items-center justify-between">
-        <span className="label">{beforeAfter.demo ? "Cor suavizada" : "Bruto"}</span>
+        <span className="label">Bruto</span>
         <span className="label flex items-center gap-2 !text-white">
           <span className="h-px w-6 bg-accent" aria-hidden="true" /> Arraste <span className="h-px w-6 bg-accent" aria-hidden="true" />
         </span>
-        <span className="label">{beforeAfter.demo ? "Cor original" : "Final"}</span>
+        <span className="label">Final</span>
       </div>
     </section>
   );

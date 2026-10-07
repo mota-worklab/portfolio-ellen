@@ -43,9 +43,7 @@ export function Vertical() {
     <section ref={root} id="vertical" aria-labelledby="vertical-title" className="relative lg:h-[180vh]">
       <div className="gutter grid items-center gap-10 py-24 lg:sticky lg:top-0 lg:h-svh lg:grid-cols-12 lg:gap-6 lg:py-0">
         <div className="lg:col-span-5">
-          <p data-vertical-meta className="label mb-6 flex items-center gap-3">
-            <span className="size-1.5 rounded-full bg-accent" aria-hidden="true" /> Formato vertical
-          </p>
+          
           <h2 id="vertical-title" data-vertical-title className="display text-[clamp(2.25rem,4.6vw,4.75rem)]">
             Feito para
             <br />a tela que
@@ -59,7 +57,7 @@ export function Vertical() {
 
           <ul data-vertical-meta className="mt-8 flex flex-wrap gap-2" aria-label="Formatos">
             {FORMATS.map((f) => (
-              <li key={f} className="flex items-center gap-2 border border-line px-3 py-1.5 text-sm">
+              <li key={f} className="flex items-center gap-2 rounded-lg border border-line px-3 py-1.5 text-sm">
                 {f} <span className="font-mono text-[10px] text-mute">9:16</span>
               </li>
             ))}

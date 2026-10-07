@@ -56,7 +56,7 @@ export function BeforeAfter({ before, after, demo = false }: BeforeAfterProps) {
     <div
       ref={frameRef}
       data-cursor="drag"
-      className="relative aspect-[4/5] w-full touch-pan-y select-none overflow-hidden bg-ink-3 sm:aspect-video"
+      className="relative aspect-[4/5] w-full touch-pan-y select-none overflow-hidden rounded-2xl bg-ink-3 sm:aspect-video"
       onPointerDown={onPointerDown}
       onPointerMove={(e) => dragging && setFromClientX(e.clientX)}
       onPointerUp={() => setDragging(false)}
@@ -67,8 +67,8 @@ export function BeforeAfter({ before, after, demo = false }: BeforeAfterProps) {
         <LazyVideo source={after} videoRef={afterRef} placeholder={{ label: "Final — com cor", tone: "graded" }} />
       </div>
 
-      <span className="label pointer-events-none absolute left-4 top-4 bg-ink/60 px-2 py-1 !text-white backdrop-blur sm:left-6 sm:top-6">Antes</span>
-      <span className="label pointer-events-none absolute right-4 top-4 bg-ink/60 px-2 py-1 !text-white backdrop-blur sm:right-6 sm:top-6">Depois</span>
+      <span className="label pointer-events-none absolute left-4 top-4 rounded-md bg-ink/60 px-2 py-1 !text-white backdrop-blur sm:left-6 sm:top-6">Antes</span>
+      <span className="label pointer-events-none absolute right-4 top-4 rounded-md bg-ink/60 px-2 py-1 !text-white backdrop-blur sm:right-6 sm:top-6">Depois</span>
 
       <div className="pointer-events-none absolute inset-y-0 w-px bg-white" style={{ left: `${pos}%` }}>
         <div

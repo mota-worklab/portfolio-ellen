@@ -31,7 +31,7 @@ export function ProjectCard({ project, index, onOpen }: ProjectCardProps) {
           data-project-frame
           data-cursor="view"
           aria-label={`Assistir ${project.title} — vídeo vertical`}
-          className="relative block aspect-[9/16] w-full overflow-hidden bg-ink-3"
+          className="relative block aspect-[9/16] w-full overflow-hidden rounded-xl bg-ink-3"
         >
           <LazyVideo source={project.preview} image={project.thumbnail} alt={project.title} mode="hover" active={active && !reduced} placeholder={{ label: project.title }} />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
@@ -70,7 +70,7 @@ export function ProjectCard({ project, index, onOpen }: ProjectCardProps) {
         onBlur={() => setActive(false)}
         data-cursor="view"
         data-project-frame
-        className={`relative col-span-12 aspect-video overflow-hidden bg-ink-3 lg:col-span-8 ${flip ? "lg:order-2" : ""}`}
+        className={`relative col-span-12 aspect-video overflow-hidden rounded-xl bg-ink-3 lg:col-span-8 ${flip ? "lg:order-2" : ""}`}
         aria-label={`Abrir projeto ${number}: ${project.title}`}
       >
         <div className="absolute inset-0 transition-[transform,filter] duration-[1200ms] ease-[var(--ease-out-expo)] group-hover/project:scale-[1.04] group-hover/project:contrast-[1.08] group-hover/project:saturate-[1.1]">

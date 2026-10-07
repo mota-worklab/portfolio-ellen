@@ -44,25 +44,11 @@ export function Footer() {
           ))}
         </ul>
 
-        <p className="label">
-          Feito com
-          <br />
-          <span className="!text-white">paixão + código</span>
-        </p>
+        
 
-        <button
-          type="button"
-          onClick={() => scrollToTarget(lenis, "#intro")}
-          className="label flex min-h-11 items-start justify-end gap-2 !text-white hover:!text-accent"
-        >
-          Voltar ao topo <ArrowUp size={12} aria-hidden="true" />
-        </button>
+    
       </div>
-      <p className="mt-8 max-w-2xl text-xs leading-relaxed text-mute">
-        Vídeos de exemplo: <a href="https://mango.blender.org/" target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:text-white">Tears of Steel</a>
-        {" "}© Blender Foundation · <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:text-white">CC BY 3.0</a>.
-        {" "}Trechos recortados e adaptados para demonstração; não são trabalhos da Ellen.
-      </p>
+ 
     </footer>
   );
 }

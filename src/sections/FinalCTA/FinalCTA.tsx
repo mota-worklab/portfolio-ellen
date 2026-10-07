@@ -42,9 +42,7 @@ export function FinalCTA() {
       <div data-bar="top" className="absolute inset-x-0 top-0 z-10 h-1/2 origin-top scale-y-0 bg-black" aria-hidden="true" />
       <div data-bar="bottom" className="absolute inset-x-0 bottom-0 z-10 h-1/2 origin-bottom scale-y-0 bg-black" aria-hidden="true" />
 
-      <p data-cta-meta className="label absolute left-[var(--page-gutter)] top-24 tabular-nums">
-        Último frame — {toTimecode(pageDuration)}
-      </p>
+   
 
       <h2 id="cta-title" data-cta-title className="display text-[clamp(2.75rem,8vw,9rem)]">
         Vamos criar
