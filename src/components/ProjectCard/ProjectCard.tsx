@@ -94,20 +94,18 @@ export function ProjectCard({ project, index, onOpen }: ProjectCardProps) {
           </button>
         </h3>
 
-        <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-line pt-4 lg:mt-auto lg:grid-cols-1">
-          <div>
-            <dt className="label mb-1">Função</dt>
-            <dd className="text-sm">{project.role.join(" / ")}</dd>
-          </div>
-          <div>
-            <dt className="label mb-1">Ano</dt>
-            <dd className="font-mono text-sm tabular-nums">{project.year}</dd>
-          </div>
-        </dl>
+        {(project.role.length > 0 || project.year) && (
+          <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-line pt-4 lg:mt-auto lg:grid-cols-1">
+            {project.role.length > 0 && <div><dt className="label mb-1">Função</dt><dd className="text-sm">{project.role.join(" / ")}</dd></div>}
+            {project.year && <div><dt className="label mb-1">Ano</dt><dd className="font-mono text-sm tabular-nums">{project.year}</dd></div>}
+          </dl>
+        )}
 
-        <p className="mt-4 max-w-sm text-sm text-mute transition-all duration-700 lg:translate-y-2 lg:opacity-0 lg:group-hover/project:translate-y-0 lg:group-hover/project:opacity-100 lg:group-focus-within/project:translate-y-0 lg:group-focus-within/project:opacity-100">
-          {project.description}
-        </p>
+        {project.description && (
+          <p className="mt-4 max-w-sm text-sm text-mute transition-all duration-700 lg:translate-y-2 lg:opacity-0 lg:group-hover/project:translate-y-0 lg:group-hover/project:opacity-100 lg:group-focus-within/project:translate-y-0 lg:group-focus-within/project:opacity-100">
+            {project.description}
+          </p>
+        )}
         <span className="label mt-4 flex items-center gap-1.5 !text-white lg:hidden" aria-hidden="true">
           Ver projeto <ArrowUpRight size={12} />
         </span>

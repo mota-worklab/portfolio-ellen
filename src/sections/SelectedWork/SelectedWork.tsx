@@ -40,8 +40,8 @@ export function SelectedWork() {
   }, [filter, limit]);
 
   return (
-    <section ref={root} id="work" aria-labelledby="work-title" className="gutter py-24 sm:py-40">
-      <div className="mb-8 flex items-end justify-between gap-6 border-b border-line pb-6">
+    <section ref={root} id="work" aria-labelledby="work-title" className="gutter relative isolate py-24 sm:py-40">
+      <div className="relative z-10 mb-8 flex items-end justify-between gap-6 border-b border-line pb-6">
         <h2 id="work-title" data-work-title className="display text-[clamp(2.25rem,4.6vw,4.75rem)]">
           Trabalhos
           <br />
@@ -50,7 +50,7 @@ export function SelectedWork() {
         <p className="label pb-2">({String(projects.length).padStart(2, "0")})</p>
       </div>
 
-      <div className="mb-12 flex flex-wrap items-center justify-between gap-5 sm:mb-16">
+      <div className="relative z-10 mb-12 flex flex-wrap items-center justify-between gap-5 sm:mb-16">
         <div className="flex flex-wrap gap-2" role="group" aria-label="Filtrar trabalhos por formato">
           {([
             { value: "all", label: "Todos" },
@@ -72,7 +72,7 @@ export function SelectedWork() {
       </div>
 
       {vertical.length > 0 && (
-        <div className="mb-20 sm:mb-28">
+        <div className="relative z-10 mb-20 sm:mb-28">
           <div className="mb-6 flex flex-wrap items-baseline justify-between gap-3">
             <h3 className="font-display text-xl font-extrabold uppercase tracking-tight">Na vertical</h3>
             <p className="label">Reels / Shorts / Redes sociais</p>
@@ -87,7 +87,7 @@ export function SelectedWork() {
       )}
 
       {horizontal.length > 0 && (
-        <div>
+        <div className="relative z-10">
           <div className="mb-8 flex flex-wrap items-baseline justify-between gap-3 border-b border-line pb-5">
             <h3 className="font-display text-xl font-extrabold uppercase tracking-tight">Em tela aberta</h3>
             <p className="label">Filmes / Campanhas / Histórias</p>

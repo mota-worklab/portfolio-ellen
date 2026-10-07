@@ -65,7 +65,19 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
       </header>
 
       <div data-pv-item className="mt-4" key={project.id}>
-        {hasVideo(project.video) ? (
+        {project.embedUrl ? (
+          <div className={`w-full overflow-hidden bg-black ${project.format === "vertical" ? "mx-auto aspect-[9/16] max-w-sm" : "aspect-video"}`}>
+            <iframe
+              key={project.embedUrl}
+              src={project.embedUrl}
+              title={`Assistir ${project.title}`}
+              className="h-full w-full border-0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+              referrerPolicy="strict-origin-when-cross-origin"
+            />
+          </div>
+        ) : hasVideo(project.video) ? (
           <VideoPlayer source={project.video} title={project.title} format={project.format} />
         ) : (
           <div className={`relative overflow-hidden bg-ink-3 ${project.format === "vertical" ? "mx-auto aspect-[9/16] max-w-sm" : "aspect-video"}`}>
@@ -82,9 +94,7 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
 
       <div className="mt-12 grid grid-cols-12 gap-x-6 gap-y-10 sm:mt-16">
         <div className="col-span-12 lg:col-span-7">
-          <p data-pv-item className="label mb-4">
-            {project.category}
-          </p>
+          {project.category && <p data-pv-item className="label mb-4">{project.category}</p>}
           <h2 data-pv-item className="display text-[clamp(2.25rem,4.6vw,4.75rem)]">
             {project.title}
           </h2>
@@ -95,26 +105,22 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
           )}
         </div>
 
-        <dl data-pv-item className="col-span-12 grid grid-cols-2 content-start gap-8 border-t border-line pt-6 lg:col-span-4 lg:col-start-9">
-          <div>
-            <dt className="label mb-3">Função</dt>
-            {project.role.map((r) => (
-              <dd key={r} className="text-base">
-                {r}
-              </dd>
-            ))}
-          </div>
-          <div>
-            <dt className="label mb-3">Ano</dt>
-            <dd className="font-mono tabular-nums">{project.year}</dd>
-            {project.client && (
-              <>
-                <dt className="label mb-3 mt-8">Cliente</dt>
-                <dd>{project.client}</dd>
-              </>
+        {(project.role.length > 0 || project.year || project.client) && (
+          <dl data-pv-item className="col-span-12 grid grid-cols-2 content-start gap-8 border-t border-line pt-6 lg:col-span-4 lg:col-start-9">
+            {project.role.length > 0 && (
+              <div>
+                <dt className="label mb-3">Função</dt>
+                {project.role.map((r) => <dd key={r} className="text-base">{r}</dd>)}
+              </div>
             )}
-          </div>
-        </dl>
+            {(project.year || project.client) && (
+              <div>
+                {project.year && <><dt className="label mb-3">Ano</dt><dd className="font-mono tabular-nums">{project.year}</dd></>}
+                {project.client && <><dt className="label mb-3 mt-8">Cliente</dt><dd>{project.client}</dd></>}
+              </div>
+            )}
+          </dl>
+        )}
       </div>
 
       {project.additionalMedia && project.additionalMedia.length > 0 && (

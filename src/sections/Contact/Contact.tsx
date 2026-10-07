@@ -92,10 +92,10 @@ export function Contact() {
 
           <figure className="relative min-h-[30rem] overflow-hidden border-t border-line bg-ink-3 sm:min-h-[38rem] lg:order-1 lg:border-r lg:border-t-0">
             <img
-              src="/media/contato-ellen-pb.jpg"
+              src="/media/contato-ellen-pb-1600.png"
               alt="Ellen em retrato em preto e branco"
-              width={4000}
-              height={6000}
+              width={1067}
+              height={1600}
               loading="lazy"
               decoding="async"
               className="absolute inset-0 size-full object-cover object-center transition-transform duration-700 hover:scale-105"
