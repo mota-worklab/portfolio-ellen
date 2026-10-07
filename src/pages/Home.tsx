@@ -7,7 +7,6 @@ import { Process } from "../sections/Process/Process";
 import { Services } from "../sections/Services/Services";
 import { Vertical } from "../sections/Vertical/Vertical";
 import { About } from "../sections/About/About";
-import { Stats } from "../sections/Stats/Stats";
 import { FinalCTA } from "../sections/FinalCTA/FinalCTA";
 import { Contact } from "../sections/Contact/Contact";
 import { ScrollStroke } from "../components/ui/svg-follow-scroll";
@@ -30,7 +29,7 @@ export function Home() {
       </div>
       <Services />
       <Vertical />
-     
+
       <FinalCTA />
       <Contact />
     </main>
