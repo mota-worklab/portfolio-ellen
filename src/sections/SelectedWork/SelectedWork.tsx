@@ -62,7 +62,7 @@ export function SelectedWork() {
               type="button"
               aria-pressed={filter === item.value}
               onClick={() => { setFilter(item.value); setLimit(8); }}
-              className={`min-h-11 rounded-lg border px-4 font-mono text-[10px] uppercase tracking-wider transition-colors ${filter === item.value ? "border-white bg-white text-ink" : "border-line text-mute hover:border-white/50 hover:text-white"}`}
+              className={`min-h-11 rounded-lg border px-4 font-mono text-[10px] tracking-wide transition-colors ${filter === item.value ? "border-white bg-white text-ink" : "border-line text-mute hover:border-white/50 hover:text-white"}`}
             >
               {item.label}
             </button>
@@ -74,7 +74,7 @@ export function SelectedWork() {
       {vertical.length > 0 && (
         <div className="relative z-10 mb-20 sm:mb-28">
           <div className="mb-6 flex flex-wrap items-baseline justify-between gap-3">
-            <h3 className="font-display text-xl font-extrabold uppercase tracking-tight">Na vertical</h3>
+            <h3 className="font-display text-xl font-extrabold tracking-tight">Na vertical</h3>
             <p className="label">Reels / Shorts / Redes sociais</p>
           </div>
           <div className="mx-auto grid max-w-sm gap-x-5 gap-y-10 sm:max-w-none sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -89,7 +89,7 @@ export function SelectedWork() {
       {horizontal.length > 0 && (
         <div className="relative z-10">
           <div className="mb-8 flex flex-wrap items-baseline justify-between gap-3 border-b border-line pb-5">
-            <h3 className="font-display text-xl font-extrabold uppercase tracking-tight">Em tela aberta</h3>
+            <h3 className="font-display text-xl font-extrabold tracking-tight">Em tela aberta</h3>
             <p className="label">Filmes / Campanhas / Histórias</p>
           </div>
           <div className="flex flex-col gap-20 sm:gap-28">
@@ -103,7 +103,7 @@ export function SelectedWork() {
 
       {shown < filtered.length && (
         <div className="mt-16 flex justify-center">
-          <button type="button" onClick={() => setLimit((value) => value + 8)} className="min-h-12 rounded-lg border border-line px-8 font-mono text-xs uppercase tracking-wider transition-colors hover:border-accent hover:text-accent">
+          <button type="button" onClick={() => setLimit((value) => value + 8)} className="min-h-12 rounded-lg border border-line px-8 font-mono text-xs tracking-wide transition-colors hover:border-accent hover:text-accent">
             Mostrar mais trabalhos ({filtered.length - shown})
           </button>
         </div>

@@ -63,7 +63,7 @@ export function ScrollTimeline() {
       aria-label="Linha do tempo da página"
       className="gutter pointer-events-none fixed inset-x-0 bottom-0 z-40 bg-gradient-to-t from-ink/90 to-transparent pb-3 pt-6 opacity-80 transition-opacity duration-300 hover:opacity-100 sm:pb-4"
     >
-      <div className="pointer-events-auto flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.14em] text-white/60 sm:gap-5">
+      <div className="pointer-events-auto flex items-center gap-3 font-mono text-[10px] tracking-[0.055em] text-white/60 sm:gap-5">
         <span ref={tcRef} className="tabular-nums text-white" aria-hidden="true">
           00:00:00:00
         </span>

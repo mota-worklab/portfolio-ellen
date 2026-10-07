@@ -87,7 +87,7 @@ export function Hero() {
           </h1>
           <p
             data-hero-meta
-            className="mt-5 flex items-center gap-3 font-mono text-[clamp(0.75rem,1.1vw,0.95rem)] uppercase tracking-[0.3em] text-white/80 sm:mt-7"
+            className="mt-5 flex items-center gap-3 font-mono text-[clamp(0.75rem,1.1vw,0.95rem)] tracking-[0.12em] text-white/80 sm:mt-7"
           >
            
             {site.hero.eyebrow}

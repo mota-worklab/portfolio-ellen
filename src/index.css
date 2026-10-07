@@ -82,8 +82,7 @@ html.lenis body {
   .label {
     font-family: var(--font-mono);
     font-size: 0.6875rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+    letter-spacing: 0.055em;
     color: var(--color-mute);
   }
 

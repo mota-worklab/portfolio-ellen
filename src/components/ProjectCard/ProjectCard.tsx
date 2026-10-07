@@ -42,7 +42,7 @@ export function ProjectCard({ project, index, onOpen }: ProjectCardProps) {
           </span>
         </button>
         <p className="label mb-2 mt-5">{project.category}</p>
-        <h3 className="font-display text-xl font-extrabold uppercase leading-tight tracking-[-0.03em]">{project.title}</h3>
+        <h3 className="font-display text-xl font-extrabold leading-tight tracking-[-0.03em]">{project.title}</h3>
         <p className="mt-2 text-xs text-mute">{project.role.join(" / ")}</p>
       </article>
     );
@@ -89,7 +89,7 @@ export function ProjectCard({ project, index, onOpen }: ProjectCardProps) {
       <div className={`col-span-12 flex flex-col lg:col-span-3 ${flip ? "lg:order-1 lg:items-end lg:text-right" : ""}`}>
         <p className="label mb-3">{project.category}</p>
         <h3 className="display text-[clamp(1.5rem,2.4vw,2.5rem)]">
-          <button type="button" onClick={onOpen} className="text-left uppercase" tabIndex={-1} data-cursor="view">
+          <button type="button" onClick={onOpen} className="text-left" tabIndex={-1} data-cursor="view">
             {project.title}
           </button>
         </h3>

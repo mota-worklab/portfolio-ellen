@@ -70,7 +70,7 @@ export function Vertical() {
               prefillContact("Vídeos Curtos");
               scrollToTarget(lenis, "#contact");
             }}
-            className="group mt-10 inline-flex items-center gap-3 font-display text-lg font-extrabold uppercase tracking-[-0.02em]"
+            className="group mt-10 inline-flex items-center gap-3 font-display text-lg font-extrabold tracking-[-0.02em]"
           >
             <span className="border-b-2 border-accent pb-1">Quero um vídeo vertical</span>
             <ArrowRight className="size-5 transition-transform duration-500 group-hover:translate-x-1.5" aria-hidden="true" />

@@ -74,7 +74,7 @@ export function FinalCTA() {
           e.preventDefault();
           scrollToTarget(lenis, "#contact");
         }}
-        className="group relative mt-10 inline-flex w-fit items-center gap-4 font-display text-[clamp(1.125rem,1.8vw,1.5rem)] font-extrabold uppercase tracking-[-0.02em]"
+        className="group relative mt-10 inline-flex w-fit items-center gap-4 font-display text-[clamp(1.125rem,1.8vw,1.5rem)] font-extrabold tracking-[-0.02em]"
       >
         <span className="border-b-2 border-accent pb-1">Vamos conversar</span>
         <ArrowRight className="size-[1.2em] transition-transform duration-500 group-hover:translate-x-2" strokeWidth={1.5} aria-hidden="true" />

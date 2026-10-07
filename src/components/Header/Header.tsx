@@ -44,7 +44,7 @@ export function Header() {
     <>
       <a
         href="#main"
-        className="sr-only z-[100] bg-accent px-4 py-2 font-mono text-xs uppercase text-ink focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        className="sr-only z-[100] bg-accent px-4 py-2 font-mono text-xs text-ink focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
       >
         Pular para o conteúdo
       </a>
@@ -56,7 +56,7 @@ export function Header() {
             e.preventDefault();
             go("#intro");
           }}
-          className="group flex items-center gap-2.5 font-display text-sm font-extrabold uppercase tracking-[-0.02em]"
+          className="group flex items-center gap-2.5 font-display text-sm font-extrabold tracking-[-0.02em]"
           aria-label={`${site.name} — início`}
         >
           <span className="relative size-2 rounded-full bg-white">
@@ -113,7 +113,7 @@ export function Header() {
         className="gutter fixed inset-0 z-[60] flex flex-col bg-ink py-5 md:hidden"
       >
         <div className="flex items-center justify-between">
-          <span className="font-display text-sm font-extrabold uppercase">{site.name}</span>
+          <span className="font-display text-sm font-extrabold">{site.name}</span>
           <button type="button" className="-mr-2 grid size-11 place-items-center" onClick={() => setOpen(false)} aria-label="Fechar menu">
             <X size={20} />
           </button>
