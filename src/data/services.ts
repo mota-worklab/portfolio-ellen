@@ -29,12 +29,6 @@ export const services: Service[] = [
     media: { video: demoLandscape },
   },
   {
-    id: "motion-design",
-    title: "Motion Design",
-    description: "Tipografia, grafismos e transições que se movem com o corte, não por cima dele.",
-    media: { video: demoLandscape },
-  },
-  {
     id: "color-grading",
     title: "Colorização",
     description: "Do LOG chapado a um look consistente que carrega o clima da peça.",
