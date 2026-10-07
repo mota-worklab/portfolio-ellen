@@ -77,10 +77,10 @@ export function Showreel() {
       </div>
 
       {open && (
-        <Overlay label="Showreel" onClose={() => setOpen(false)}>
+        <Overlay label="Showreel" onClose={() => setOpen(false)} scrollable={false}>
           {(close) => (
-            <div className="gutter flex min-h-svh flex-col justify-center gap-6 py-6">
-              <div className="flex items-center justify-between">
+            <div className="gutter flex h-full min-h-0 flex-col gap-3 py-3 sm:gap-4 sm:py-5">
+              <div className="flex shrink-0 items-center justify-between">
                 <p className="label !text-white">Showreel — {year}</p>
                 <button
                   type="button"
@@ -91,7 +91,9 @@ export function Showreel() {
                   Fechar <span className="text-white/40">ESC</span> <X size={14} aria-hidden="true" />
                 </button>
               </div>
-              <VideoPlayer source={showreel.video} title="Showreel" autoPlay placeholderHint="src/config/site.ts → showreel.video" />
+              <div className="min-h-0 flex-1">
+                <VideoPlayer source={showreel.video} title="Showreel" autoPlay fitContainer placeholderHint="src/config/site.ts → showreel.video" />
+              </div>
             </div>
           )}
         </Overlay>

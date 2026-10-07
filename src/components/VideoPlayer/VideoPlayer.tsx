@@ -10,11 +10,12 @@ interface VideoPlayerProps {
   format?: "horizontal" | "vertical";
   autoPlay?: boolean;
   className?: string;
+  fitContainer?: boolean;
   placeholderHint?: string;
 }
 
 /** Player com controles minimalistas e acessíveis (teclado: espaço/K, ←/→, M, F). */
-export function VideoPlayer({ source, title, format = "horizontal", autoPlay = false, className = "", placeholderHint }: VideoPlayerProps) {
+export function VideoPlayer({ source, title, format = "horizontal", autoPlay = false, className = "", fitContainer = false, placeholderHint }: VideoPlayerProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
@@ -95,7 +96,7 @@ export function VideoPlayer({ source, title, format = "horizontal", autoPlay = f
 
   if (!hasVideo(source)) {
     return (
-      <div className={`relative w-full bg-ink-3 ${portrait ? "mx-auto aspect-[9/16] max-w-sm" : "aspect-video"} ${className}`}>
+      <div className={`relative w-full bg-ink-3 ${fitContainer ? "h-full" : portrait ? "mx-auto aspect-[9/16] max-w-sm" : "aspect-video"} ${className}`}>
         <FramePlaceholder label={title} hint={placeholderHint} />
       </div>
     );
@@ -107,7 +108,7 @@ export function VideoPlayer({ source, title, format = "horizontal", autoPlay = f
   return (
     <div
       ref={wrapRef}
-      className={`group relative w-full overflow-hidden bg-black ${fullscreen ? "h-full" : portrait ? "mx-auto aspect-[9/16] max-w-sm" : "aspect-video"} ${hideUi ? "cursor-none" : ""} ${className}`}
+      className={`group relative w-full overflow-hidden bg-black ${fullscreen || fitContainer ? "h-full" : portrait ? "mx-auto aspect-[9/16] max-w-sm" : "aspect-video"} ${hideUi ? "cursor-none" : ""} ${className}`}
       onPointerMove={wake}
       onKeyDown={onKey}
     >

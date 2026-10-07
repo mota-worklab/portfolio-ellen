@@ -9,13 +9,14 @@ interface OverlayProps {
   label: string;
   onClose: () => void;
   children: (close: () => void) => ReactNode;
+  scrollable?: boolean;
 }
 
 /**
  * Camada fullscreen (lightbox / página de projeto).
  * Entra com um "wipe" vertical, como um corte com transição, e sai pelo mesmo caminho.
  */
-export function Overlay({ label, onClose, children }: OverlayProps) {
+export function Overlay({ label, onClose, children, scrollable = true }: OverlayProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const closing = useRef(false);
   const reduced = useReducedMotion();
@@ -55,10 +56,10 @@ export function Overlay({ label, onClose, children }: OverlayProps) {
       role="dialog"
       aria-modal="true"
       aria-label={label}
-      className="fixed inset-0 z-[80] overflow-y-auto overscroll-contain bg-ink"
+      className={`fixed inset-0 z-[80] overscroll-contain bg-ink ${scrollable ? "overflow-y-auto" : "overflow-hidden"}`}
       data-lenis-prevent
     >
-      <div data-overlay-content>{children(close)}</div>
+      <div data-overlay-content className={scrollable ? undefined : "h-full min-h-0"}>{children(close)}</div>
     </div>,
     document.body,
   );
