@@ -1,4 +1,4 @@
-import { ArrowUpRight, Camera, MessageCircle, Phone } from "lucide-react";
+import { ArrowUpRight, MessageCircle, Phone } from "lucide-react";
 import { useLayoutEffect, useRef } from "react";
 import { site } from "../../config/site";
 import { visibleSocialLinks } from "../../data/social";
@@ -16,10 +16,16 @@ function SocialLogo({ id }: { id: string }) {
       </span>
     );
   }
-  if (id === "instagram") return <span className={markClass} aria-hidden="true"><Camera size={19} strokeWidth={1.8} /></span>;
+  if (id === "instagram") return (
+    <span className={markClass} aria-hidden="true">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" />
+        <circle cx="12" cy="12" r="4" />
+        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+      </svg>
+    </span>
+  );
   if (id === "behance") return <span className={markClass} aria-hidden="true">Bē</span>;
-  if (id === "vimeo") return <span className={`${markClass} text-lg italic`} aria-hidden="true">v</span>;
-  if (id === "linkedin") return <span className={markClass} aria-hidden="true">in</span>;
   return <span className={markClass} aria-hidden="true">↗</span>;
 }
 
@@ -48,7 +54,7 @@ export function Contact() {
         </h2>
 
         <div data-contact-channel className="mt-14 grid overflow-hidden rounded-2xl border border-line bg-ink-2 sm:mt-20 lg:grid-cols-2">
-          <div className="flex min-h-80 flex-col justify-between p-6 sm:p-9 lg:order-2">
+          <div className="flex min-h-80 flex-col p-6 sm:p-9 lg:order-2">
             <p className="label mb-6">Canais</p>
             <div>
               {email && (
@@ -61,28 +67,18 @@ export function Contact() {
               <ul aria-label="Redes sociais">
                 {visibleSocialLinks.map((link) => (
                   <li key={link.id} className="border-t border-line last:border-b">
-                    {link.url ? (
-                      <a
-                        href={link.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="group flex min-h-16 items-center justify-between font-display text-xl font-extrabold tracking-[-0.03em] transition-colors hover:pl-2 hover:text-accent sm:min-h-18 sm:text-2xl"
-                      >
-                        <span className="flex items-center gap-4">
-                          <SocialLogo id={link.id} />
-                          {link.label}
-                        </span>
-                        <ArrowUpRight size={20} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
-                      </a>
-                    ) : (
-                      <span className="flex min-h-16 items-center justify-between font-display text-xl font-extrabold tracking-[-0.03em] text-white/25 sm:min-h-18 sm:text-2xl">
-                        <span className="flex items-center gap-4">
-                          <SocialLogo id={link.id} />
-                          {link.label}
-                        </span>
-                        <span className="label">URL pendente</span>
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group flex min-h-16 items-center justify-between font-display text-xl font-extrabold tracking-[-0.03em] transition-colors hover:pl-2 hover:text-accent sm:min-h-18 sm:text-2xl"
+                    >
+                      <span className="flex items-center gap-4">
+                        <SocialLogo id={link.id} />
+                        {link.label}
                       </span>
-                    )}
+                      <ArrowUpRight size={20} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+                    </a>
                   </li>
                 ))}
               </ul>
