@@ -1,4 +1,3 @@
-import { ArrowUp } from "lucide-react";
 import { site } from "../../config/site";
 import { socialLinks } from "../../data/social";
 import { scrollToTarget, useLenis } from "../SmoothScroll/SmoothScroll";

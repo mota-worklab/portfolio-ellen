@@ -14,24 +14,21 @@ export const site = {
   hero: {
     eyebrow: "Editora de vídeo",
     title: ["Ellen", "Dumont"],
-    /**
-     * TESTE — trecho de "Tears of Steel" (© Blender Foundation, CC-BY 3.0, mango.blender.org).
-     * Substitua pelo seu vídeo (curto, sem áudio, 8–15s em loop, ~2–4 MB).
-     */
+    /** Montagem curta de trabalhos cadastrados no portfólio; sem áudio para autoplay. */
     video: {
-      webm: "/media/hero-test.webm",
-      mp4: "/media/hero-test.mp4",
-      poster: "/media/hero-test.jpg",
+      webm: "/media/hero-ellen.webm",
+      mp4: "/media/hero-ellen.mp4",
+      poster: "/media/hero-ellen.jpg",
     } as VideoSource,
   },
 
   /** Seção "Formato vertical" — mão 3D segurando um celular que toca um vídeo 9:16. */
   vertical: {
-    /** TESTE — recorte vertical de "Tears of Steel" (© Blender Foundation, CC-BY 3.0). */
+    /** Trecho vertical do projeto Isaac — lançamento Fireblade. */
     video: {
-      webm: "/media/vertical-test.webm",
-      mp4: "/media/vertical-test.mp4",
-      poster: "/media/vertical-test.jpg",
+      webm: "/media/vertical-fireblade.webm",
+      mp4: "/media/vertical-fireblade.mp4",
+      poster: "/media/vertical-fireblade.jpg",
     } as VideoSource,
     /**
      * Opcional: modelo .glb de mão + celular. Sem ele, a cena usa a mão "esculpida" em código.
