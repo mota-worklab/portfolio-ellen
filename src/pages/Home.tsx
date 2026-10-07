@@ -30,7 +30,7 @@ export function Home() {
       </div>
       <Services />
       <Vertical />
-      <Stats />
+     
       <FinalCTA />
       <Contact />
     </main>

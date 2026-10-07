@@ -100,9 +100,7 @@ export function Contact() {
               decoding="async"
               className="absolute inset-0 size-full object-cover object-center transition-transform duration-700 hover:scale-105"
             />
-            <figcaption className="label absolute bottom-4 left-4 rounded-md bg-ink/70 px-2 py-1 !text-white backdrop-blur sm:bottom-5 sm:left-5">
-              Bastidores
-            </figcaption>
+           
           </figure>
         </div>
       </div>
