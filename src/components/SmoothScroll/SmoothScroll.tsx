@@ -15,7 +15,7 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (reduced) return;
 
-    const instance = new Lenis({ lerp: 0.12, wheelMultiplier: 1, anchors: true });
+    const instance = new Lenis({ lerp: 0.085, wheelMultiplier: 0.9, anchors: true });
     const tick = (time: number) => instance.raf(time * 1000);
 
     instance.on("scroll", ScrollTrigger.update);

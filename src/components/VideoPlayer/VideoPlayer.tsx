@@ -133,6 +133,17 @@ export function VideoPlayer({ source, title, format = "horizontal", autoPlay = f
         {source?.mp4 && <source src={source.mp4} type="video/mp4" />}
       </video>
 
+      {!playing && (
+        <button
+          type="button"
+          onClick={toggle}
+          aria-label="Reproduzir vídeo"
+          className="absolute left-1/2 top-1/2 z-10 grid size-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-white/60 bg-black/50 text-white shadow-lg backdrop-blur-sm transition-colors hover:border-accent hover:bg-black/70 sm:hidden"
+        >
+          <Play size={22} fill="currentColor" className="translate-x-0.5" />
+        </button>
+      )}
+
       <div
         className={`absolute inset-x-0 bottom-0 flex items-center gap-1 px-2 bg-gradient-to-t from-black/80 to-transparent pb-2 pt-10 transition-opacity duration-300 sm:gap-3 sm:px-5 sm:pb-4 sm:pt-12 ${hideUi ? "pointer-fine:opacity-0" : "opacity-100"}`}
       >

@@ -4,15 +4,12 @@ import { services } from "../../data/services";
 import { gsap, MQ } from "../../lib/gsap";
 import { prefillContact } from "../../lib/events";
 import { revealLines } from "../../animations/textReveal";
-import { LazyVideo } from "../../components/VideoPlayer/LazyVideo";
 import { scrollToTarget, useLenis } from "../../components/SmoothScroll/SmoothScroll";
 
 export function Services() {
   const root = useRef<HTMLElement>(null);
-  const previewRef = useRef<HTMLDivElement>(null);
   const lenis = useLenis();
   const [hovered, setHovered] = useState<number | null>(null);
-  const hoveredMedia = hovered !== null ? services[hovered].media : undefined;
 
   useLayoutEffect(() => {
     const mm = gsap.matchMedia(root);
@@ -25,20 +22,6 @@ export function Services() {
         duration: 1,
         scrollTrigger: { trigger: "[data-services-list]", start: "top 80%", once: true },
       });
-    });
-
-    // Preview flutuante que segue o ponteiro (somente desktop).
-    mm.add(`${MQ.finePointer} and ${MQ.desktop}`, () => {
-      const el = previewRef.current;
-      if (!el) return;
-      const xTo = gsap.quickTo(el, "x", { duration: 0.6, ease: "power3.out" });
-      const yTo = gsap.quickTo(el, "y", { duration: 0.6, ease: "power3.out" });
-      const onMove = (e: PointerEvent) => {
-        xTo(e.clientX);
-        yTo(e.clientY);
-      };
-      window.addEventListener("pointermove", onMove);
-      return () => window.removeEventListener("pointermove", onMove);
     });
 
     return () => mm.revert();
@@ -92,25 +75,6 @@ export function Services() {
           </li>
         ))}
       </ul>
-
-      {/* Preview flutuante — só aparece quando o serviço tem mídia configurada. */}
-      <div ref={previewRef} className="pointer-events-none fixed left-0 top-0 z-30 hidden lg:block" aria-hidden="true">
-        <div
-          className={`relative aspect-[4/5] w-56 -translate-x-1/2 -translate-y-1/2 overflow-hidden bg-ink-3 transition-[opacity,transform] duration-500 ${
-            hoveredMedia ? "scale-100 opacity-100" : "scale-75 opacity-0"
-          }`}
-        >
-          {hoveredMedia && (
-            <LazyVideo
-              key={hovered}
-              source={hoveredMedia.video}
-              image={hoveredMedia.image}
-              eager
-              placeholder={{ label: "" }}
-            />
-          )}
-        </div>
-      </div>
     </section>
   );
 }

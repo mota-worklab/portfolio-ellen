@@ -50,7 +50,7 @@ export const site = {
   about: {
     statement: [
       ["Eu não", "só edito", "vídeos."],
-      ["Eu crio", "experiências."],
+      ["Eu crio", "histórias."],
     ],
     /** Retrato principal (recorte com fundo transparente). */
     portrait: {
