@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, ExternalLink, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, X } from "lucide-react";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import type { Project } from "../../data/projects";
 import { gsap } from "../../lib/gsap";
@@ -122,17 +122,12 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
         )}
       </div>
 
-      <nav aria-label="Navegação entre projetos" className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 border-t border-line pt-2 sm:gap-4">
+      <nav aria-label="Navegação entre projetos" className="grid grid-cols-2 items-center gap-2 border-t border-line pt-2 sm:gap-4">
         <button type="button" onClick={() => onNavigate(prev)} className="group flex min-h-11 min-w-0 flex-col items-start justify-center text-left">
           <span className="label flex items-center gap-2 group-hover:!text-accent">
             <ArrowLeft size={12} aria-hidden="true" /> Anterior
           </span>
         </button>
-        {project.embedUrl ? (
-          <a href={project.embedUrl} target="_blank" rel="noopener noreferrer" className="label flex min-h-11 items-center gap-2 text-center hover:!text-accent" aria-label={`Abrir ${project.title} em nova aba`}>
-            Abrir vídeo <ExternalLink size={12} aria-hidden="true" />
-          </a>
-        ) : <span />}
         <button type="button" onClick={() => onNavigate(next)} className="group flex min-h-11 min-w-0 flex-col items-end justify-center text-right">
           <span className="label flex items-center gap-2 group-hover:!text-accent">
             Próximo <ArrowRight size={12} aria-hidden="true" />

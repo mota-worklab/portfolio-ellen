@@ -32,7 +32,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: "vanguarda-visual-ep01",
-    title: "O Código das Cores — EP 01",
+    title: "O Código das Cores | EP 01",
     category: "Vanguarda Visual",
     year: "",
     description: "",
@@ -42,7 +42,7 @@ export const projects: Project[] = [
   },
   {
     id: "vanguarda-visual-ep02",
-    title: "O Código das Cores — EP 02",
+    title: "O Código das Cores | EP 02",
     category: "Vanguarda Visual",
     year: "",
     description: "",
@@ -52,7 +52,7 @@ export const projects: Project[] = [
   },
   {
     id: "vanguarda-visual-ep03",
-    title: "O Código das Cores — EP 03",
+    title: "O Código das Cores | EP 03",
     category: "Vanguarda Visual",
     year: "",
     description: "",
@@ -62,7 +62,7 @@ export const projects: Project[] = [
   },
   {
     id: "vanguarda-visual-ep04",
-    title: "O Código das Cores — EP 04",
+    title: "O Código das Cores | EP 04",
     category: "Vanguarda Visual",
     year: "",
     description: "",
@@ -82,7 +82,7 @@ export const projects: Project[] = [
   },
   {
     id: "minex-hub-hackathon",
-    title: "Minex Hub — Aftermovie Hackathon",
+    title: "Minex Hub | Aftermovie Hackathon",
     category: "Aftermovie",
     year: "2026",
     description: "",
@@ -92,7 +92,7 @@ export const projects: Project[] = [
   },
   {
     id: "agromix-institucional-colaboradores",
-    title: "Agromix — Institucional Colaboradores",
+    title: "Agromix | Institucional Colaboradores",
     category: "Institucional",
     year: "2025",
     description: "",
@@ -102,7 +102,7 @@ export const projects: Project[] = [
   },
   {
     id: "laboratorio-spalazanni-institucional",
-    title: "Laboratório Spalazanni — Institucional",
+    title: "Laboratório Spalazanni | Institucional",
     category: "Institucional",
     year: "2025",
     description: "",
@@ -112,7 +112,7 @@ export const projects: Project[] = [
   },
   {
     id: "umbu-solidario-minidoc-accabem",
-    title: "Umbu Solidário — Minidoc ACCABEM",
+    title: "Umbu Solidário | Minidoc ACCABEM",
     category: "Minidocumentário",
     year: "2025",
     description: "",
@@ -144,7 +144,7 @@ export const projects: Project[] = [
   },
   {
     id: "isaac-motoclube-fireblade-vertical",
-    title: "Isaac — Motoclube Lançamento Fireblade",
+    title: "Isaac | Motoclube Lançamento Fireblade",
     category: "Conteúdo vertical",
     format: "vertical",
     year: "2026",
@@ -155,7 +155,7 @@ export const projects: Project[] = [
   },
   {
     id: "victoria-bittencourt-apresentacao-vertical",
-    title: "Victoria Bittencourt — Apresentação Profissional",
+    title: "Victoria Bittencourt | Apresentação Profissional",
     category: "Reels",
     format: "vertical",
     year: "2026",
@@ -166,7 +166,7 @@ export const projects: Project[] = [
   },
   {
     id: "vigilantes-sinais-alerta-vertical",
-    title: "Vigilantes — Sinais de Alerta: Violência",
+    title: "Vigilantes | Sinais de Alerta: Violência",
     category: "Conteúdo vertical",
     format: "vertical",
     year: "",
@@ -177,7 +177,7 @@ export const projects: Project[] = [
   },
   {
     id: "bocazul-depoimento-belle-vertical",
-    title: "Bocazul — Depoimento Belle",
+    title: "Bocazul | Depoimento Belle",
     category: "Reels",
     format: "vertical",
     year: "2026",
