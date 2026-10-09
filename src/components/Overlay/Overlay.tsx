@@ -2,6 +2,7 @@ import { useCallback, useLayoutEffect, useRef, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { gsap } from "../../lib/gsap";
 import { useFocusTrap } from "../../hooks/useFocusTrap";
+import { useIsTouch } from "../../hooks/useMediaQuery";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 import { useScrollLock } from "../SmoothScroll/SmoothScroll";
 
@@ -20,33 +21,34 @@ export function Overlay({ label, onClose, children, scrollable = true }: Overlay
   const rootRef = useRef<HTMLDivElement>(null);
   const closing = useRef(false);
   const reduced = useReducedMotion();
+  const touch = useIsTouch();
 
   useScrollLock(true);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      if (reduced) {
+      if (reduced || touch) {
         gsap.from(rootRef.current, { opacity: 0, duration: 0.2, ease: "none" });
         return;
       }
       gsap
         .timeline()
-        .fromTo(rootRef.current, { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", duration: 0.8, ease: "expo.inOut" })
-        .from("[data-overlay-content]", { y: 40, opacity: 0, duration: 0.8 }, "-=0.3");
+        .fromTo(rootRef.current, { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", duration: 0.8, ease: "expo.inOut", clearProps: "clipPath" })
+        .from("[data-overlay-content]", { y: 40, opacity: 0, duration: 0.8, clearProps: "transform,opacity" }, "-=0.3");
     }, rootRef);
     return () => ctx.revert();
-  }, [reduced]);
+  }, [reduced, touch]);
 
   const close = useCallback(() => {
     if (closing.current) return;
     closing.current = true;
     if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
     gsap.to(rootRef.current, {
-      ...(reduced ? { opacity: 0, duration: 0.2 } : { clipPath: "inset(0 0 100% 0)", duration: 0.7 }),
+      ...(reduced || touch ? { opacity: 0, duration: 0.2 } : { clipPath: "inset(0 0 100% 0)", duration: 0.7 }),
       ease: "expo.inOut",
       onComplete: onClose,
     });
-  }, [onClose, reduced]);
+  }, [onClose, reduced, touch]);
 
   useFocusTrap(rootRef, true, close);
 

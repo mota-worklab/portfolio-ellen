@@ -3,6 +3,7 @@ import { useEffect, useLayoutEffect, useRef } from "react";
 import type { Project } from "../../data/projects";
 import { gsap } from "../../lib/gsap";
 import { hasVideo } from "../../lib/media";
+import { useIsTouch } from "../../hooks/useMediaQuery";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 import { Overlay } from "../Overlay/Overlay";
 import { LazyVideo } from "../VideoPlayer/LazyVideo";
@@ -26,6 +27,7 @@ export function ProjectModal({ projects, index, onNavigate, onClose }: ProjectMo
 function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps) {
   const root = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
+  const touch = useIsTouch();
   const project = projects[index];
   const total = projects.length;
   const prev = (index - 1 + total) % total;
@@ -36,12 +38,12 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
   // Troca de projeto: corte seco com um flash curto do conteúdo, como um jump cut.
   useLayoutEffect(() => {
     root.current?.closest('[role="dialog"]')?.scrollTo(0, 0);
-    if (reduced) return;
+    if (reduced || touch) return;
     const ctx = gsap.context(() => {
-      gsap.from("[data-pv-item]", { y: 30, opacity: 0, stagger: 0.05, duration: 0.8 });
+      gsap.from("[data-pv-item]", { y: 30, opacity: 0, stagger: 0.05, duration: 0.8, clearProps: "transform,opacity" });
     }, root);
     return () => ctx.revert();
-  }, [index, reduced]);
+  }, [index, reduced, touch]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -67,7 +69,7 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
 
       <div data-pv-item className="flex min-w-0 shrink-0 items-center justify-center sm:min-h-0 sm:flex-1" key={project.id}>
         <div className={`relative w-full overflow-hidden rounded-lg bg-black ${portrait ? "aspect-[9/16] max-w-[min(100%,calc(56.25svh_-_6.75rem))] sm:max-w-[max(9rem,calc(56.25dvh_-_6.75rem))]" : project.embedUrl
-          ? "aspect-[4/3] min-h-60 sm:aspect-video sm:min-h-0 sm:max-w-[max(16rem,calc(177.78dvh_-_23.11rem))]"
+          ? "h-[clamp(16rem,75vw,30rem)] sm:h-auto sm:aspect-video sm:max-w-[max(16rem,calc(177.78dvh_-_23.11rem))]"
           : "aspect-video sm:max-w-[max(16rem,calc(177.78dvh_-_23.11rem))]"}`}>
           {project.embedUrl ? (
             <iframe
@@ -92,6 +94,17 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
           )}
         </div>
       </div>
+
+      {project.embedUrl && (
+        <a
+          href={project.embedUrl.replace(/\/preview(?:\?.*)?$/, "/view")}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="label flex min-h-11 items-center justify-end gap-2 hover:!text-accent"
+        >
+          Abrir no Drive <ArrowRight size={14} aria-hidden="true" />
+        </a>
+      )}
 
       <div className="grid shrink-0 grid-cols-12 gap-x-4 gap-y-2 sm:gap-x-6">
         <div className="col-span-12 lg:col-span-8">
