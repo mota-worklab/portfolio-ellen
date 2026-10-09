@@ -62,9 +62,9 @@ export function BeforeAfter({ before, after, demo = false }: BeforeAfterProps) {
       onPointerUp={() => setDragging(false)}
       onPointerCancel={() => setDragging(false)}
     >
-      <LazyVideo className={demo ? "saturate-[0.35] contrast-[0.7] brightness-110" : ""} source={before} videoRef={beforeRef} placeholder={{ label: "Bruto — LOG", tone: "flat", hint: "src/data/projects.ts → beforeAfter" }} />
+      <LazyVideo className={demo ? "saturate-[0.35] contrast-[0.7] brightness-110" : ""} source={before} videoRef={beforeRef} placeholder={{ label: "Bruto (LOG)", tone: "flat", hint: "src/data/projects.ts → beforeAfter" }} />
       <div className="absolute inset-0" style={{ clipPath: `inset(0 0 0 ${pos}%)` }}>
-        <LazyVideo source={after} videoRef={afterRef} placeholder={{ label: "Final — com cor", tone: "graded" }} />
+        <LazyVideo source={after} videoRef={afterRef} placeholder={{ label: "Final com cor", tone: "graded" }} />
       </div>
 
       <span className="label pointer-events-none absolute left-4 top-4 rounded-md bg-ink/60 px-2 py-1 !text-white backdrop-blur sm:left-6 sm:top-6">Antes</span>

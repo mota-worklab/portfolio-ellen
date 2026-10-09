@@ -51,7 +51,7 @@ export function Services() {
               onFocus={() => setHovered(i)}
               onBlur={() => setHovered(null)}
               className="group/service grid w-full grid-cols-[2.5rem_1fr_auto] items-start gap-x-4 py-6 text-left sm:grid-cols-[4rem_1fr_auto] sm:py-8 lg:grid-cols-[6rem_1fr_minmax(0,22rem)_auto] lg:items-center"
-              aria-label={`${service.title} — ${service.description} Falar sobre este serviço.`}
+              aria-label={`${service.title}: ${service.description} Falar sobre este serviço.`}
             >
               <span className="font-mono text-xs tabular-nums text-mute transition-colors group-hover/service:text-accent lg:text-sm">
                 {String(i + 1).padStart(2, "0")}

@@ -73,7 +73,7 @@ export function Showreel() {
           {(close) => (
             <div className="gutter mx-auto flex min-h-dvh w-full max-w-[110rem] flex-col gap-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-[max(0.75rem,env(safe-area-inset-top))] sm:gap-5 sm:py-5">
               <div className="flex items-center justify-between gap-4 border-b border-line pb-2">
-                <p className="label !text-white">Showreel — {year}</p>
+                <p className="label !text-white">Showreel {year}</p>
                 <button
                   type="button"
                   onClick={close}

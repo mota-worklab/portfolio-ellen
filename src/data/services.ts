@@ -13,7 +13,7 @@ export const services: Service[] = [
   {
     id: "short-form",
     title: "Vídeos Curtos",
-    description: "Cortes verticais pensados para o primeiro segundo — gancho, ritmo e retenção.",
+    description: "Cortes verticais pensados para o primeiro segundo: gancho, ritmo e retenção.",
   },
   {
     id: "commercials",

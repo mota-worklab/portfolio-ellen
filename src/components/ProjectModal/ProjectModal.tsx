@@ -91,7 +91,7 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
               image={project.thumbnail}
               alt={project.title}
               eager
-              placeholder={{ label: `${number} — ${project.title}`, hint: "src/data/projects.ts → video" }}
+              placeholder={{ label: `${number}. ${project.title}`, hint: "src/data/projects.ts → video" }}
             />
           )}
         </div>

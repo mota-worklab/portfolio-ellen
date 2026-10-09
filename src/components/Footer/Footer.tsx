@@ -12,7 +12,7 @@ export function Footer() {
         type="button"
         onClick={() => scrollToTarget(lenis, "#intro")}
         className="group display mb-16 flex w-full justify-between text-[clamp(3.5rem,16vw,16rem)] leading-[0.8]"
-        aria-label={`${site.name} — voltar ao início`}
+        aria-label={`${site.name}: voltar ao início`}
       >
         {letters.map((ch, i) => (
           <span

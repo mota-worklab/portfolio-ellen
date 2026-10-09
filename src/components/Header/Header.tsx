@@ -57,7 +57,7 @@ export function Header() {
             go("#intro");
           }}
           className="group flex items-center gap-2.5 font-display text-sm font-extrabold tracking-[-0.02em]"
-          aria-label={`${site.name} — início`}
+          aria-label={`${site.name}: início`}
         >
           <span className="relative size-2 rounded-full bg-white">
             <span className="absolute inset-0 rounded-full bg-white opacity-0 group-hover:animate-ping group-hover:opacity-60" />
