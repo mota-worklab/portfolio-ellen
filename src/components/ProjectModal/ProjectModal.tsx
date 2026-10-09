@@ -68,9 +68,11 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
       </header>
 
       <div data-pv-item className="flex min-w-0 shrink-0 items-center justify-center sm:min-h-0 sm:flex-1" key={project.id}>
-        <div className={`relative w-full overflow-hidden rounded-lg bg-black ${portrait ? "aspect-[9/16] max-w-[min(100%,calc(56.25svh_-_6.75rem))] sm:max-w-[max(9rem,calc(56.25dvh_-_6.75rem))]" : project.embedUrl
+        <div className={`relative w-full overflow-hidden rounded-lg bg-black ${project.embedUrl
           ? "h-[clamp(16rem,75vw,30rem)] sm:h-auto sm:aspect-video sm:max-w-[max(16rem,calc(177.78dvh_-_23.11rem))]"
-          : "aspect-video sm:max-w-[max(16rem,calc(177.78dvh_-_23.11rem))]"}`}>
+          : portrait
+            ? "aspect-[9/16] max-w-[min(100%,calc(56.25svh_-_6.75rem))] sm:max-w-[max(9rem,calc(56.25dvh_-_6.75rem))]"
+            : "aspect-video sm:max-w-[max(16rem,calc(177.78dvh_-_23.11rem))]"}`}>
           {project.embedUrl ? (
             <iframe
               key={project.embedUrl}
