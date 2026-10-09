@@ -1,5 +1,4 @@
 import type { VideoSource } from "../lib/media";
-import { demoLandscape } from "../data/demoMedia";
 
 /**
  * Configuração central do site.
@@ -38,11 +37,10 @@ export const site = {
   },
 
   showreel: {
-    // Exemplo temporário; substituir pelo showreel completo.
-    video: demoLandscape,
-    /** Trecho curto e leve, sem áudio, que toca em loop no frame da seção. */
-    preview: demoLandscape,
-    demo: true,
+    video: { mp4: "/media/Editando%20-%20SITE.mp4" } as VideoSource,
+    /** Preview silencioso, carregado apenas ao se aproximar da seção. */
+    preview: { mp4: "/media/Editando%20-%20SITE.mp4" } as VideoSource,
+    demo: false,
     /** Ex.: "01:24". Vazio = não exibe. */
     duration: "",
   },

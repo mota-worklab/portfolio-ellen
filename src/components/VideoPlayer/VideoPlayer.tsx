@@ -1,6 +1,7 @@
 import { Maximize, Minimize, Pause, Play, Volume2, VolumeX } from "lucide-react";
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 import { hasVideo, type VideoSource } from "../../lib/media";
+import { useIsTouch } from "../../hooks/useMediaQuery";
 import { toClock } from "../../lib/timecode";
 import { FramePlaceholder } from "./FramePlaceholder";
 
@@ -16,6 +17,7 @@ interface VideoPlayerProps {
 
 /** Player com controles minimalistas e acessíveis (teclado: espaço/K, ←/→, M, F). */
 export function VideoPlayer({ source, title, format = "horizontal", autoPlay = false, className = "", fitContainer = false, placeholderHint }: VideoPlayerProps) {
+  const touch = useIsTouch();
   const wrapRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
@@ -53,16 +55,18 @@ export function VideoPlayer({ source, title, format = "horizontal", autoPlay = f
   }, []);
 
   useEffect(() => {
-    if (!autoPlay) return;
+    // No touch, o play fica com o gesto do usuário e os controles nativos.
     const v = videoRef.current;
-    v?.play().catch(() => {
-      // Navegador bloqueou autoplay com som: tenta mudo.
-      if (!v) return;
+    if (!autoPlay || touch || !v) return;
+    let cancelled = false;
+    v.play().catch(() => {
+      if (cancelled || videoRef.current !== v) return;
       v.muted = true;
       setMuted(true);
       v.play().catch(() => {});
     });
-  }, [autoPlay]);
+    return () => { cancelled = true; };
+  }, [autoPlay, touch]);
 
   const wake = () => {
     setIdle(false);
@@ -97,7 +101,7 @@ export function VideoPlayer({ source, title, format = "horizontal", autoPlay = f
 
   if (!hasVideo(source)) {
     return (
-      <div className={`relative w-full bg-ink-3 ${fitContainer ? "h-full" : portrait ? "mx-auto aspect-[9/16] max-w-sm" : "aspect-video"} ${className}`}>
+      <div className={`w-full bg-ink-3 ${fitContainer ? "absolute inset-0 h-full" : "relative"} ${fitContainer ? "h-full" : portrait ? "mx-auto aspect-[9/16] max-w-sm" : "aspect-video"} ${className}`}>
         <FramePlaceholder label={title} hint={placeholderHint} />
       </div>
     );
@@ -109,19 +113,20 @@ export function VideoPlayer({ source, title, format = "horizontal", autoPlay = f
   return (
     <div
       ref={wrapRef}
-      className={`group relative w-full overflow-hidden bg-black ${fullscreen || fitContainer ? "h-full" : portrait ? "mx-auto aspect-[9/16] max-w-sm" : "aspect-video"} ${hideUi ? "pointer-fine:cursor-none" : ""} ${className}`}
+      className={`group ${fitContainer ? "absolute inset-0" : "relative"} w-full overflow-hidden bg-black ${fullscreen || fitContainer ? "h-full" : portrait ? "mx-auto aspect-[9/16] max-w-sm" : "aspect-video"} ${hideUi ? "pointer-fine:cursor-none" : ""} ${className}`}
       onPointerMove={wake}
       onPointerDown={wake}
       onKeyDown={onKey}
     >
       <video
         ref={videoRef}
-        className="h-full w-full object-contain"
+        className="block h-full w-full object-contain"
+        controls={touch}
         poster={source?.poster}
         playsInline
         preload="metadata"
         muted={muted}
-        onClick={toggle}
+        onClick={touch ? undefined : toggle}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
         onTimeUpdate={(e) => setTime(e.currentTarget.currentTime)}
@@ -133,7 +138,7 @@ export function VideoPlayer({ source, title, format = "horizontal", autoPlay = f
         {source?.mp4 && <source src={source.mp4} type="video/mp4" />}
       </video>
 
-      {!playing && (
+      {!touch && !playing && (
         <button
           type="button"
           onClick={toggle}
@@ -144,7 +149,7 @@ export function VideoPlayer({ source, title, format = "horizontal", autoPlay = f
         </button>
       )}
 
-      <div
+      {!touch && <div
         className={`absolute inset-x-0 bottom-0 flex items-center gap-1 px-2 bg-gradient-to-t from-black/80 to-transparent pb-2 pt-10 transition-opacity duration-300 sm:gap-3 sm:px-5 sm:pb-4 sm:pt-12 ${hideUi ? "pointer-fine:opacity-0" : "opacity-100"}`}
       >
         <button
@@ -201,7 +206,7 @@ export function VideoPlayer({ source, title, format = "horizontal", autoPlay = f
         >
           {fullscreen ? <Minimize size={16} /> : <Maximize size={16} />}
         </button>
-      </div>
+      </div>}
     </div>
   );
 }

@@ -41,10 +41,7 @@ export function Showreel() {
             uma história
           </span>
         </h2>
-        <div data-reel-meta className="label hidden shrink-0 pb-3 text-right sm:block">
-          <p className="!text-white">{year}</p>
-          {showreel.duration && <p>{showreel.duration}</p>}
-        </div>
+       
       </div>
 
       <button
@@ -69,12 +66,7 @@ export function Showreel() {
         </span>
       </button>
 
-      <div data-reel-meta className="mt-5 flex items-center justify-between">
-        <p className="label">Showreel — {year}</p>
-        <p className="label flex items-center gap-2">
-          <span className="size-1.5 rounded-full bg-accent" aria-hidden="true" /> Assistir
-        </p>
-      </div>
+      
 
       {open && (
         <Overlay label="Showreel" onClose={() => setOpen(false)}>
@@ -91,8 +83,8 @@ export function Showreel() {
                   Fechar <span className="text-white/40">ESC</span> <X size={14} aria-hidden="true" />
                 </button>
               </div>
-              <div className="flex min-h-0 flex-1 items-center justify-center">
-                <div className="aspect-video w-full max-w-[max(16rem,calc(177.78dvh_-_14.22rem))] overflow-hidden rounded-lg bg-black">
+              <div className="flex min-w-0 shrink-0 items-center justify-center sm:min-h-0 sm:flex-1">
+                <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-black sm:max-w-[max(16rem,calc(177.78dvh_-_14.22rem))]">
                   <VideoPlayer source={showreel.video} title="Showreel" autoPlay fitContainer placeholderHint="src/config/site.ts → showreel.video" />
                 </div>
               </div>

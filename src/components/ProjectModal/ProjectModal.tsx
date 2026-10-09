@@ -65,14 +65,16 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
         </button>
       </header>
 
-      <div data-pv-item className="flex min-h-0 flex-1 items-center justify-center" key={project.id}>
-        <div className={`relative w-full overflow-hidden rounded-lg bg-black ${portrait ? "aspect-[9/16] max-w-[max(9rem,calc(56.25dvh_-_6.75rem))]" : "aspect-video max-w-[max(16rem,calc(177.78dvh_-_23.11rem))]"}`}>
+      <div data-pv-item className="flex min-w-0 shrink-0 items-center justify-center sm:min-h-0 sm:flex-1" key={project.id}>
+        <div className={`relative w-full overflow-hidden rounded-lg bg-black ${portrait ? "aspect-[9/16] max-w-[min(100%,calc(56.25svh_-_6.75rem))] sm:max-w-[max(9rem,calc(56.25dvh_-_6.75rem))]" : project.embedUrl
+          ? "aspect-[4/3] min-h-60 sm:aspect-video sm:min-h-0 sm:max-w-[max(16rem,calc(177.78dvh_-_23.11rem))]"
+          : "aspect-video sm:max-w-[max(16rem,calc(177.78dvh_-_23.11rem))]"}`}>
           {project.embedUrl ? (
             <iframe
               key={project.embedUrl}
               src={project.embedUrl}
               title={`Assistir ${project.title}`}
-              className="absolute inset-0 h-full w-full border-0"
+              className="absolute inset-0 block h-full w-full border-0"
               allow="autoplay; fullscreen; picture-in-picture"
               allowFullScreen
               referrerPolicy="strict-origin-when-cross-origin"

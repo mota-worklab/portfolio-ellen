@@ -1,5 +1,4 @@
 import type { VideoSource } from "../lib/media";
-import { demoLandscape } from "./demoMedia";
 
 export interface ProjectMedia {
   type: "image" | "video";
@@ -190,8 +189,8 @@ export const projects: Project[] = [
 
 /** Comparação antes/depois. Use o mesmo trecho, com mesmo enquadramento e duração. */
 export const beforeAfter: { before: VideoSource; after: VideoSource; caption: string; demo: boolean } = {
-  before: demoLandscape,
-  after: demoLandscape,
-  demo: true, // Desative ao substituir pelos arquivos reais de antes/depois.
+  before: { mp4: "/media/Antes%20Color%20-%20SITE.mp4" },
+  after: { mp4: "/media/Depois%20Color%20-%20SITE.mp4" },
+  demo: false,
   caption: "Cor e contraste",
 };
