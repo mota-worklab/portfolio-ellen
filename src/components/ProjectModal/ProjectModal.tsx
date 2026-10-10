@@ -34,7 +34,6 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
   const prev = (index - 1 + total) % total;
   const next = (index + 1) % total;
   const number = String(index + 1).padStart(2, "0");
-  const portrait = project.format === "vertical";
 
   // Troca de projeto: corte seco com um flash curto do conteúdo, como um jump cut.
   useLayoutEffect(() => {
@@ -58,8 +57,8 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
   }, [next, prev, onNavigate]);
 
   return (
-    <div ref={root} className="gutter mx-auto flex min-h-dvh w-full max-w-[110rem] flex-col gap-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-[max(0.75rem,env(safe-area-inset-top))] sm:gap-5 sm:py-5">
-      <header className="flex items-center justify-between gap-4 border-b border-line pb-2">
+    <div ref={root} className="project-view gutter mx-auto w-full max-w-[110rem]">
+      <header className="project-view__header flex items-center justify-between gap-4 border-b border-line pb-2">
         <p className="label !text-white">
           Projeto {number} <span className="text-white/40">/ {String(total).padStart(2, "0")}</span>
         </p>
@@ -68,30 +67,34 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
         </button>
       </header>
 
-      <div data-pv-item className="flex min-w-0 shrink-0 items-center justify-center sm:min-h-0 sm:flex-1" key={project.id}>
-        <div className={`relative w-full overflow-hidden rounded-lg bg-black ${portrait
-          ? "aspect-[9/16] max-w-[22.5rem] lg:max-w-[max(9rem,calc(56.25dvh_-_6.75rem))]"
-          : `${project.embedUrl && !hasVideo(project.video) ? "min-h-[12.5rem]" : ""} aspect-video sm:max-w-[max(16rem,calc(177.78dvh_-_23.11rem))]`}`}>
-          {hasVideo(project.video) ? (
-            <VideoPlayer source={project.video} title={project.title} format={project.format} fitContainer />
-          ) : project.embedUrl ? (
-            <DriveVideoPlayer embedUrl={project.embedUrl} title={project.title} />
-          ) : (
-            <LazyVideo
-              source={project.preview}
-              image={project.thumbnail}
-              alt={project.title}
-              eager
-              placeholder={{ label: `${number}. ${project.title}`, hint: "src/data/projects.ts → video" }}
-            />
-          )}
-        </div>
+      <div className="project-view__media" key={project.id}>
+        {project.embedUrl && !hasVideo(project.video) ? (
+          <DriveVideoPlayer embedUrl={project.embedUrl} title={project.title} format={project.format} />
+        ) : (
+          <div className="project-stage">
+            <div className="project-stage__viewport">
+              <div className="project-stage__frame" data-format={project.format ?? "horizontal"}>
+                {hasVideo(project.video) ? (
+                  <VideoPlayer source={project.video} title={project.title} format={project.format} fitContainer />
+                ) : (
+                  <LazyVideo
+                    source={project.preview}
+                    image={project.thumbnail}
+                    alt={project.title}
+                    eager
+                    placeholder={{ label: `${number}. ${project.title}`, hint: "src/data/projects.ts → video" }}
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
-      <div className="grid shrink-0 grid-cols-12 gap-x-4 gap-y-2 sm:gap-x-6">
+      <div className="project-view__details grid min-w-0 grid-cols-12 content-start gap-x-4 gap-y-2 sm:gap-x-6">
         <div className="col-span-12 lg:col-span-8">
           {project.category && <p data-pv-item className="label mb-1 sm:mb-2">{project.category}</p>}
-          <h2 data-pv-item className="display text-[clamp(1.35rem,3vw,2.75rem)] leading-none">
+          <h2 data-pv-item className="display break-words text-[clamp(1.125rem,3vw,2.75rem)] leading-tight">
             {project.title}
           </h2>
           {project.description && (
@@ -119,7 +122,7 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
         )}
       </div>
 
-      <nav aria-label="Navegação entre projetos" className="grid grid-cols-2 items-center gap-2 border-t border-line pt-2 sm:gap-4">
+      <nav aria-label="Navegação entre projetos" className="project-view__nav grid grid-cols-2 items-center gap-2 border-t border-line pt-2 sm:gap-4">
         <button type="button" onClick={() => onNavigate(prev)} className="group flex min-h-11 min-w-0 flex-col items-start justify-center text-left">
           <span className="label flex items-center gap-2 group-hover:!text-accent">
             <ArrowLeft size={12} aria-hidden="true" /> Anterior

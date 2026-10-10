@@ -91,6 +91,77 @@ html.lenis body {
     padding-inline: var(--page-gutter);
   }
 
+  .project-view {
+    display: grid;
+    grid-template-rows: auto minmax(12rem, 1fr) auto auto;
+    height: 100dvh;
+    gap: clamp(0.5rem, 1.5dvh, 1.25rem);
+    padding-top: max(0.75rem, env(safe-area-inset-top));
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+
+  .project-view__media {
+    min-width: 0;
+    min-height: 0;
+  }
+
+  .project-stage {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .project-stage__viewport {
+    container-type: size;
+    display: grid;
+    place-items: center;
+    min-width: 0;
+    min-height: 0;
+  }
+
+  /* A proporção usa a área livre real, já descontados título e controles. */
+  .project-stage__frame {
+    --video-ratio: 16 / 9;
+    position: relative;
+    width: min(100cqw, calc(100cqh * var(--video-ratio)));
+    aspect-ratio: var(--video-ratio);
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background: #000;
+  }
+
+  .project-stage__frame[data-format="vertical"] {
+    --video-ratio: 9 / 16;
+  }
+
+  /* No celular deitado, a ficha fica ao lado para liberar altura para o vídeo. */
+  @media (orientation: landscape) and (max-height: 500px) and (min-width: 640px) {
+    .project-view {
+      grid-template-columns: minmax(0, 1fr) minmax(12rem, 28%);
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      column-gap: 1.25rem;
+    }
+
+    .project-view__header {
+      grid-column: 1 / -1;
+    }
+
+    .project-view__media {
+      grid-row: 2 / 4;
+    }
+
+    .project-view__details {
+      min-height: 0;
+      overflow-y: auto;
+    }
+
+    .project-view__nav {
+      grid-column: 2;
+    }
+  }
+
   /* Marcas de corte nos cantos de um frame (referência a safe-area/viewfinder). */
   .crop-marks {
     position: relative;

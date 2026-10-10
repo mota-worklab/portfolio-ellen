@@ -20,7 +20,7 @@ export interface Project {
   preview?: VideoSource;
   /** Vídeo principal, exibido na página do projeto. */
   video?: VideoSource;
-  /** Player incorporado para vídeos hospedados no Google Drive ou YouTube. */
+  /** Player incorporado para vídeos hospedados no Google Drive. */
   embedUrl?: string;
   role: string[];
   client?: string;
