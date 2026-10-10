@@ -3,14 +3,14 @@ interface DriveVideoPlayerProps {
   title: string;
 }
 
-/** Player do Drive dentro do modal, tanto no desktop quanto no mobile. */
+/** Player incorporado do Drive ou YouTube dentro do modal. */
 export function DriveVideoPlayer({ embedUrl, title }: DriveVideoPlayerProps) {
   return (
     <iframe
       src={embedUrl}
       title={`Assistir ${title}`}
       className="absolute inset-0 block h-full w-full border-0"
-      allow="autoplay; fullscreen; picture-in-picture"
+      allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
       allowFullScreen
       referrerPolicy="strict-origin-when-cross-origin"
     />
