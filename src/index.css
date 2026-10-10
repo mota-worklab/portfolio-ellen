@@ -92,10 +92,12 @@ html.lenis body {
   }
 
   .project-view {
-    display: grid;
-    grid-template-rows: auto minmax(12rem, 1fr) auto auto;
-    height: 100dvh;
-    gap: clamp(0.5rem, 1.5dvh, 1.25rem);
+    --player-height: max(300px, calc(100svh - 19rem));
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    max-width: min(90rem, calc(var(--player-height) * 16 / 9 + var(--page-gutter) * 2));
+    gap: 0.75rem;
     padding-top: max(0.75rem, env(safe-area-inset-top));
     padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
     padding-left: max(var(--page-gutter), env(safe-area-inset-left));
@@ -104,72 +106,52 @@ html.lenis body {
 
   .project-view__media {
     min-width: 0;
-    min-height: 0;
   }
 
   .project-stage {
-    display: grid;
-    grid-template-rows: minmax(0, 1fr) auto;
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    height: 100%;
-    min-height: 0;
   }
 
   .project-stage__viewport {
-    container-type: size;
     display: grid;
-    place-items: center;
+    width: 100%;
     min-width: 0;
-    min-height: 0;
+    place-items: center;
   }
 
-  /* A proporção usa a área livre real, já descontados título e controles. */
+  /* Fluxo natural: vídeo, ações e ficha ficam juntos, sem uma faixa vazia entre eles. */
   .project-stage__frame {
-    --video-ratio: 16 / 9;
     position: relative;
-    width: min(100cqw, calc(100cqh * var(--video-ratio)));
-    aspect-ratio: var(--video-ratio);
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin-inline: auto;
     overflow: hidden;
     border-radius: 0.5rem;
     background: #000;
   }
 
   .project-stage__frame[data-format="vertical"] {
-    --video-ratio: 9 / 16;
+    width: min(100%, 22.5rem, max(200px, calc(var(--player-height) * 9 / 16)));
+    aspect-ratio: 9 / 16;
   }
 
-  /* No celular deitado, a ficha fica ao lado para liberar altura para o vídeo. */
-  @media (orientation: landscape) and (max-height: 500px) and (min-width: 640px) {
-    .project-view {
-      grid-template-columns: minmax(0, 1fr) minmax(12rem, 28%);
-      grid-template-rows: auto minmax(0, 1fr) auto;
-      column-gap: 1.25rem;
-    }
+  /* O player interno do Drive usa pelo menos 300px; abaixo disso os controles são cortados.
+     O vídeo mantém sua proporção dentro do iframe, com barras quando necessário. */
+  .project-stage__frame[data-provider="drive"] {
+    min-height: 300px;
+  }
 
-    .project-view__header {
-      grid-column: 1 / -1;
-    }
+  .project-stage__frame[data-provider="drive"][data-format="vertical"] {
+    min-height: 0;
+  }
 
-    .project-view__media {
-      grid-row: 2 / 4;
-    }
-
-    .project-view__details {
-      flex-direction: column;
-      align-items: stretch;
-      justify-content: flex-start;
-      min-height: 0;
-      overflow-y: auto;
-    }
-
-    .project-view__details > dl {
-      max-width: none;
-      text-align: left;
-    }
-
-    .project-view__nav {
-      grid-column: 2;
-    }
+  .drive-embed[data-format="vertical"] .drive-player {
+    width: 360px;
+    height: 640px;
+    transform: scale(var(--drive-scale, 1));
+    transform-origin: top left;
   }
 
   /* Marcas de corte nos cantos de um frame (referência a safe-area/viewfinder). */

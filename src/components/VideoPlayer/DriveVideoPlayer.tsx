@@ -1,54 +1,48 @@
-import { ExternalLink, RotateCw } from "lucide-react";
-import { useState } from "react";
+import { useLayoutEffect, useRef } from "react";
 
 interface DriveVideoPlayerProps {
   embedUrl: string;
   title: string;
+  poster: string;
   format?: "horizontal" | "vertical";
 }
 
-/** O Drive controla o play no iframe; os recursos de recuperação ficam fora dele. */
+/** Player incorporado do Drive, ajustado ao formato do projeto. */
 export function DriveVideoPlayer({ embedUrl, title, format = "horizontal" }: DriveVideoPlayerProps) {
-  const [attempt, setAttempt] = useState(0);
-  const watchUrl = new URL(embedUrl);
-  watchUrl.pathname = watchUrl.pathname.replace(/\/preview\/?$/, "/view");
+  const isVertical = format === "vertical";
+
+  const frameRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const frame = frameRef.current;
+    if (!frame || !isVertical) return;
+    // Preserva um viewport interno suficiente para o Drive não cortar o vídeo.
+    const resize = () => frame.style.setProperty("--drive-scale", String(frame.clientWidth / 360));
+    resize();
+    const observer = new ResizeObserver(resize);
+    observer.observe(frame);
+    return () => observer.disconnect();
+  }, [isVertical]);
 
   return (
     <div className="project-stage">
       <div className="project-stage__viewport">
-        <div className="project-stage__frame" data-format={format}>
+        <div
+          ref={frameRef}
+          className={`project-stage__frame${isVertical ? " drive-embed" : ""}`}
+          data-format={format}
+          data-provider="drive"
+        >
           <iframe
-            key={`${embedUrl}:${attempt}`}
+            key={embedUrl}
             src={embedUrl}
             title={`Assistir ${title}`}
-            className="absolute inset-0 block h-full w-full border-0"
+            className={`drive-player absolute inset-0 block border-0${isVertical ? "" : " h-full w-full"}`}
             allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
             allowFullScreen
             referrerPolicy="strict-origin-when-cross-origin"
           />
         </div>
-      </div>
-
-      {/* O evento load não informa se o vídeo tocou: o conteúdo é de outra origem.
-          Mantenha a recuperação acessível mesmo quando o player do Google trava. */}
-      <div className="flex min-h-11 flex-wrap items-center justify-center gap-x-5 text-xs text-mute">
-        <button
-          type="button"
-          onClick={() => setAttempt((value) => value + 1)}
-          className="flex min-h-11 items-center gap-2 hover:text-white"
-          aria-label={`Recarregar vídeo: ${title}`}
-        >
-          <RotateCw size={13} aria-hidden="true" /> Recarregar
-        </button>
-        <a
-          href={watchUrl.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex min-h-11 items-center gap-2 hover:text-white"
-          aria-label={`Assistir ${title} no Google Drive (nova aba)`}
-        >
-          Abrir no Drive <ExternalLink size={13} aria-hidden="true" />
-        </a>
       </div>
     </div>
   );

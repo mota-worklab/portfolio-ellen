@@ -57,7 +57,7 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
   }, [next, prev, onNavigate]);
 
   return (
-    <div ref={root} className="project-view gutter mx-auto w-full max-w-[110rem]">
+    <div ref={root} className="project-view gutter mx-auto w-full">
       <header className="project-view__header flex items-center justify-between gap-4 border-b border-line pb-2">
         <p className="label !text-white">
           Projeto {number} <span className="text-white/40">/ {String(total).padStart(2, "0")}</span>
@@ -69,7 +69,7 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
 
       <div className="project-view__media" key={project.id}>
         {project.embedUrl && !hasVideo(project.video) ? (
-          <DriveVideoPlayer embedUrl={project.embedUrl} title={project.title} format={project.format} />
+          <DriveVideoPlayer embedUrl={project.embedUrl} title={project.title} poster={project.thumbnail} format={project.format} />
         ) : (
           <div className="project-stage">
             <div className="project-stage__viewport">

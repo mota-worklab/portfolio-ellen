@@ -267,17 +267,15 @@ export async function createHandPhoneScene(canvas: HTMLCanvasElement, opts: Hand
     smooth.x += (pointer.x - smooth.x) * k;
     smooth.y += (pointer.y - smooth.y) * k;
 
-    // Scroll: o celular gira de perfil para frente, como quem levanta o aparelho para assistir.
-    const p = smooth.p;
-    rig.rotation.y = THREE.MathUtils.lerp(-0.75, 0.12, p) + smooth.x * 0.18;
-    rig.rotation.x = THREE.MathUtils.lerp(0.35, -0.04, p) - smooth.y * 0.1;
-    rig.rotation.z = THREE.MathUtils.lerp(0.22, 0.04, p);
-    rig.position.y = THREE.MathUtils.lerp(-0.55, 0, p);
+    // Conclui o giro de entrada antes de a seção ficar fixa. Durante a
+    // reprodução, a tela fica de frente, sem inclinação ou rotação lateral.
+    const p = animated && !opts.lowPower ? THREE.MathUtils.smoothstep(smooth.p, 0, 0.5) : 1;
+    rig.rotation.set(0, THREE.MathUtils.lerp(-0.75, 0, p), 0);
+    // O ponteiro desloca a cena suavemente, sem entortar o vídeo.
+    rig.position.x = animated ? smooth.x * 0.025 : 0;
+    rig.position.y = THREE.MathUtils.lerp(-0.55, 0, p) + (animated ? -smooth.y * 0.015 : 0);
 
-    if (animated) {
-      float.rotation.z = Math.sin(t * 0.7) * 0.015;
-      float.position.x = Math.sin(t * 0.5) * 0.02;
-    }
+    float.position.x = animated ? Math.sin(t * 0.5) * 0.02 : 0;
     renderer.render(scene, camera);
   };
 
