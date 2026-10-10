@@ -8,6 +8,7 @@ import { useReducedMotion } from "../../hooks/useReducedMotion";
 import { Overlay } from "../Overlay/Overlay";
 import { LazyVideo } from "../VideoPlayer/LazyVideo";
 import { VideoPlayer } from "../VideoPlayer/VideoPlayer";
+import { DriveVideoPlayer } from "../VideoPlayer/DriveVideoPlayer";
 
 interface ProjectModalProps {
   projects: Project[];
@@ -69,22 +70,12 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
 
       <div data-pv-item className="flex min-w-0 shrink-0 items-center justify-center sm:min-h-0 sm:flex-1" key={project.id}>
         <div className={`relative w-full overflow-hidden rounded-lg bg-black ${portrait
-          ? "aspect-[9/16] max-w-[min(100%,calc(56.25svh_-_6.75rem))] sm:max-w-[max(9rem,calc(56.25dvh_-_6.75rem))]"
-          : project.embedUrl
-            ? "h-[clamp(16rem,75vw,30rem)] sm:h-auto sm:aspect-video sm:max-w-[max(16rem,calc(177.78dvh_-_23.11rem))]"
-            : "aspect-video sm:max-w-[max(16rem,calc(177.78dvh_-_23.11rem))]"}`}>
-          {project.embedUrl ? (
-            <iframe
-              key={project.embedUrl}
-              src={project.embedUrl}
-              title={`Assistir ${project.title}`}
-              className="absolute inset-0 block h-full w-full border-0"
-              allow="autoplay; fullscreen; picture-in-picture"
-              allowFullScreen
-              referrerPolicy="strict-origin-when-cross-origin"
-            />
-          ) : hasVideo(project.video) ? (
+          ? "aspect-[9/16] max-w-[22.5rem] lg:max-w-[max(9rem,calc(56.25dvh_-_6.75rem))]"
+          : `${project.embedUrl && !hasVideo(project.video) ? "min-h-[12.5rem]" : ""} aspect-video sm:max-w-[max(16rem,calc(177.78dvh_-_23.11rem))]`}`}>
+          {hasVideo(project.video) ? (
             <VideoPlayer source={project.video} title={project.title} format={project.format} fitContainer />
+          ) : project.embedUrl ? (
+            <DriveVideoPlayer embedUrl={project.embedUrl} title={project.title} />
           ) : (
             <LazyVideo
               source={project.preview}
@@ -96,17 +87,6 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
           )}
         </div>
       </div>
-
-      {project.embedUrl && (
-        <a
-          href={project.embedUrl.replace(/\/preview(?:\?.*)?$/, "/view")}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="label flex min-h-11 items-center justify-end gap-2 hover:!text-accent"
-        >
-          Abrir no Drive <ArrowRight size={14} aria-hidden="true" />
-        </a>
-      )}
 
       <div className="grid shrink-0 grid-cols-12 gap-x-4 gap-y-2 sm:gap-x-6">
         <div className="col-span-12 lg:col-span-8">
