@@ -98,6 +98,8 @@ html.lenis body {
     gap: clamp(0.5rem, 1.5dvh, 1.25rem);
     padding-top: max(0.75rem, env(safe-area-inset-top));
     padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+    padding-left: max(var(--page-gutter), env(safe-area-inset-left));
+    padding-right: max(var(--page-gutter), env(safe-area-inset-right));
   }
 
   .project-view__media {
@@ -153,8 +155,16 @@ html.lenis body {
     }
 
     .project-view__details {
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
       min-height: 0;
       overflow-y: auto;
+    }
+
+    .project-view__details > dl {
+      max-width: none;
+      text-align: left;
     }
 
     .project-view__nav {

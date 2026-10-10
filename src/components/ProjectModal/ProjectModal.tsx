@@ -91,8 +91,8 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
         )}
       </div>
 
-      <div className="project-view__details grid min-w-0 grid-cols-12 content-start gap-x-4 gap-y-2 sm:gap-x-6">
-        <div className="col-span-12 lg:col-span-8">
+      <div className="project-view__details flex min-w-0 items-end justify-between gap-4 sm:gap-6">
+        <div className="min-w-0 flex-1">
           {project.category && <p data-pv-item className="label mb-1 sm:mb-2">{project.category}</p>}
           <h2 data-pv-item className="display break-words text-[clamp(1.125rem,3vw,2.75rem)] leading-tight">
             {project.title}
@@ -105,7 +105,7 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
         </div>
 
         {(project.role.length > 0 || project.year || project.client) && (
-          <dl data-pv-item className="col-span-12 flex flex-wrap gap-x-6 gap-y-1 border-t border-line pt-2 lg:col-span-4 lg:items-end lg:justify-end lg:border-t-0 lg:pt-0">
+          <dl data-pv-item className="flex max-w-[40%] shrink-0 flex-wrap gap-x-6 gap-y-1 text-right">
             {project.role.length > 0 && (
               <div>
                 <dt className="label mb-1">Função</dt>
