@@ -14,36 +14,36 @@ export function About() {
   useLayoutEffect(() => {
     const mm = gsap.matchMedia(root);
     mm.add(MQ.motion, () => {
-      // A cena trava na tela e a frase avança linha a linha no ritmo do scroll, como um letreiro:
-      // a linha atual em destaque, a anterior logo acima e esmaecida, as mais antigas somem.
+      // Transições contínuas: a frase acompanha o scroll sem pausas entre linhas.
       const lines = gsap.utils.toArray<HTMLElement>("[data-statement-line]");
       const stack = root.current?.querySelector<HTMLElement>("[data-statement]");
-      gsap.set(lines.slice(1), { autoAlpha: 0 });
+      const stage = root.current?.querySelector<HTMLElement>("[data-statement-stage]");
+      if (!stage || !stack || !lines.length) return;
+      gsap.set(lines[0], { autoAlpha: 1, yPercent: 0 });
+      gsap.set(lines.slice(1), { autoAlpha: 0, yPercent: 18 });
       const tl = gsap.timeline({
-        defaults: { duration: 1 },
+        defaults: { duration: 1, ease: "none" },
         scrollTrigger: {
-          trigger: "[data-statement-stage]",
+          trigger: stage,
           start: "top top",
-          end: () => `+=${window.innerHeight * 0.8 * lines.length}`,
+          end: () => `+=${stage.clientHeight * 0.6 * lines.length}`,
           pin: true,
-          scrub: 0.6,
+          scrub: 0.75,
           anticipatePin: 1,
           invalidateOnRefresh: true,
         },
       });
-      tl.fromTo(lines[0], { autoAlpha: 0, yPercent: 40 }, { autoAlpha: 1, yPercent: 0, ease: "power3.out" });
       for (let k = 1; k < lines.length; k++) {
-        const at = `line-${k}`;
-        tl.addLabel(at, "+=0.6");
+        // Um intervalo curto para ler a primeira linha; depois, fluxo contínuo.
+        const at = 0.3 + (k - 1);
         if (k >= 2) {
-          // Sobe a pilha uma linha: a anterior ocupa a vaga de cima e a mais antiga sai.
-          tl.to(stack ?? [], { y: () => -(lines[k - 1].offsetTop - lines[0].offsetTop), ease: "power3.inOut" }, at);
-          tl.to(lines[k - 2], { autoAlpha: 0, ease: "power2.in" }, at);
+          tl.to(stack, { y: () => -(lines[k - 1].offsetTop - lines[0].offsetTop) }, at);
+          tl.to(lines[k - 2], { autoAlpha: 0 }, at);
         }
-        tl.to(lines[k - 1], { opacity: 0.22, ease: "power2.out" }, at);
-        tl.fromTo(lines[k], { autoAlpha: 0, yPercent: 40 }, { autoAlpha: 1, yPercent: 0, ease: "power3.out" }, at);
+        tl.to(lines[k - 1], { opacity: 0.28 }, at);
+        tl.to(lines[k], { autoAlpha: 1, yPercent: 0 }, at);
       }
-      tl.to({}, { duration: 0.6 });
+      tl.to({}, { duration: 0.35 });
 
       // Cada painel abre com um wipe; o recorte da foto sobe para dentro do quadro.
       gsap.utils.toArray<HTMLElement>("[data-about-media]").forEach((panel) => {
