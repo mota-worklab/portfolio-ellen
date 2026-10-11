@@ -137,21 +137,9 @@ html.lenis body {
     aspect-ratio: 9 / 16;
   }
 
-  /* O player interno do Drive usa pelo menos 300px; abaixo disso os controles são cortados.
-     O vídeo mantém sua proporção dentro do iframe, com barras quando necessário. */
+  /* A proporção do frame determina a altura; o iframe é escalado por dentro. */
   .project-stage__frame[data-provider="drive"] {
-    min-height: 300px;
-  }
-
-  .project-stage__frame[data-provider="drive"][data-format="vertical"] {
     min-height: 0;
-  }
-
-  .drive-embed[data-format="vertical"] .drive-player {
-    width: 360px;
-    height: 640px;
-    transform: scale(var(--drive-scale, 1));
-    transform-origin: top left;
   }
 
   /* Marcas de corte nos cantos de um frame (referência a safe-area/viewfinder). */
