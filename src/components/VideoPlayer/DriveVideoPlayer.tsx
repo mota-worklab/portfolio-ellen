@@ -7,11 +7,15 @@ interface DriveVideoPlayerProps {
   format?: "horizontal" | "vertical";
 }
 
+// Configurações independentes: ajustes no horizontal não alteram o vertical.
+const DRIVE_VIEWPORT = {
+  vertical: { width: 640, height: 640 * 16 / 9 },
+  horizontal: { width: 960, height: 540 },
+} as const;
+
 /** Player incorporado do Drive, ajustado ao formato do projeto. */
 export function DriveVideoPlayer({ embedUrl, title, format = "horizontal" }: DriveVideoPlayerProps) {
-  const isVertical = format === "vertical";
-  const playerWidth = 640;
-  const playerHeight = isVertical ? playerWidth * 16 / 9 : playerWidth * 9 / 16;
+  const { width: playerWidth, height: playerHeight } = DRIVE_VIEWPORT[format];
 
   const frameRef = useRef<HTMLDivElement>(null);
 
@@ -25,7 +29,7 @@ export function DriveVideoPlayer({ embedUrl, title, format = "horizontal" }: Dri
     const observer = new ResizeObserver(resize);
     observer.observe(frame);
     return () => observer.disconnect();
-  }, [playerWidth, isVertical]);
+  }, [playerWidth, playerHeight]);
 
   return (
     <div className="project-stage">
