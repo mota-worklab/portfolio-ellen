@@ -13,11 +13,11 @@ export const site = {
   hero: {
     eyebrow: "Editora de vídeo",
     title: ["Ellen", "Dumont"],
-    /** Montagem curta de trabalhos cadastrados no portfólio; sem áudio para autoplay. */
+    /** Vídeo principal do hero, otimizado para carregamento e autoplay silencioso. */
     video: {
-      webm: "/media/hero-ellen.webm",
-      mp4: "/media/hero-ellen.mp4",
-      poster: "/media/hero-ellen.jpg",
+      webm: "/media/hero-timeline-3.webm",
+      mp4: "/media/hero-timeline-3.mp4",
+      poster: "/media/hero-timeline-3.jpg",
     } as VideoSource,
   },
 
