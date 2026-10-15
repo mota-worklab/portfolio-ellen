@@ -1,0 +1,31 @@
+/* Subtle depth keeps the transport light and contemporary. */
+.timeline-console {
+  position: relative;
+  isolation: isolate;
+  background: rgba(18, 18, 18, .88);
+  border-color: rgba(255, 255, 255, .12);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .28), inset 0 1px 0 rgba(255, 255, 255, .04);
+}
+
+.timeline-play {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .16);
+}
+
+.timeline-groove {
+  background: rgba(255, 255, 255, .1);
+}
+
+.timeline-chapter {
+  min-width: 24px;
+  min-height: 36px;
+}
+
+.timeline-chapter:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.timeline-knob {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .25), 0 0 0 1px rgba(255, 255, 255, .18);
+}

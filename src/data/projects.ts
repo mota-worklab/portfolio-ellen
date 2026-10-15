@@ -71,7 +71,7 @@ export const projects: Project[] = [
   },
   {
     id: "isaac-acai-horizontal",
-    title: "Isaac Açaí",
+    title: "Açai Fruit Show | Aftermovie para Coyote Company",
     category: "Vídeo horizontal",
     year: "",
     description: "",
@@ -81,7 +81,7 @@ export const projects: Project[] = [
   },
   {
     id: "minex-hub-hackathon",
-    title: "Minex Hub | Aftermovie Hackathon",
+    title: "Hackathon + Mineração | Aftermovie para Agência Dragoon",
     category: "Aftermovie",
     year: "2026",
     description: "",
@@ -91,7 +91,7 @@ export const projects: Project[] = [
   },
   {
     id: "agromix-institucional-colaboradores",
-    title: "Agromix | Institucional Colaboradores",
+    title: "Agromix | Institucional para Agência Dragoon",
     category: "Institucional",
     year: "2025",
     description: "",
@@ -101,7 +101,7 @@ export const projects: Project[] = [
   },
   {
     id: "laboratorio-spalazanni-institucional",
-    title: "Laboratório Spalazanni | Institucional",
+    title: "Laboratório Spalazanni | Institucional para Agência Dragoon",
     category: "Institucional",
     year: "2025",
     description: "",
@@ -121,7 +121,7 @@ export const projects: Project[] = [
   },
   {
     id: "santo-natal-vertical",
-    title: "Santo Natal",
+    title: "B Leal | Reels para Agência Dragoon",
     category: "Reels",
     format: "vertical",
     year: "2025",
@@ -132,7 +132,7 @@ export const projects: Project[] = [
   },
   {
     id: "corrida-cidade-jardim-vertical",
-    title: "Corrida Cidade Jardim",
+    title: "Corrida Cidade Jardim | Aftermovie para Agência Dragoon",
     category: "Aftermovie",
     format: "vertical",
     year: "2026",
@@ -143,7 +143,7 @@ export const projects: Project[] = [
   },
   {
     id: "isaac-motoclube-fireblade-vertical",
-    title: "Isaac | Motoclube Lançamento Fireblade",
+    title: "Motoclube Lançamento Fireblade | Reels para Coyote Company",
     category: "Conteúdo vertical",
     format: "vertical",
     year: "2026",
@@ -154,7 +154,7 @@ export const projects: Project[] = [
   },
   {
     id: "victoria-bittencourt-apresentacao-vertical",
-    title: "Victoria Bittencourt | Apresentação Profissional",
+    title: "Victoria Bittencourt | Reels para Agência Dragoon",
     category: "Reels",
     format: "vertical",
     year: "2026",
@@ -176,7 +176,7 @@ export const projects: Project[] = [
   },
   {
     id: "bocazul-depoimento-belle-vertical",
-    title: "Bocazul | Depoimento Belle",
+    title: "Bocazul | Institucional para Agência Dragoon",
     category: "Reels",
     format: "vertical",
     year: "2026",
