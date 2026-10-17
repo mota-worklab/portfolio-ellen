@@ -1,3 +1,4 @@
+import { ProjectTitle } from "../ProjectTitle/ProjectTitle";
 import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import type { Project } from "../../data/projects";
@@ -42,7 +43,7 @@ export function ProjectCard({ project, index, onOpen }: ProjectCardProps) {
           </span>
         </button>
         <p className="label mb-2 mt-5">{project.category}</p>
-        <h3 className="font-display text-xl font-extrabold leading-tight tracking-[-0.03em]">{project.title}</h3>
+        <h3 className="font-display text-lg font-extrabold leading-tight tracking-[-0.03em]"><ProjectTitle title={project.title} /></h3>
         <p className="mt-2 text-xs text-mute">{project.role.join(" / ")}</p>
       </article>
     );
@@ -88,9 +89,9 @@ export function ProjectCard({ project, index, onOpen }: ProjectCardProps) {
 
       <div className={`col-span-12 flex flex-col lg:col-span-3 ${flip ? "lg:order-1 lg:items-end lg:text-right" : ""}`}>
         <p className="label mb-3">{project.category}</p>
-        <h3 className="display text-[clamp(1.5rem,2.4vw,2.5rem)]">
+        <h3 className="display text-[clamp(1.25rem,1.9vw,2rem)]">
           <button type="button" onClick={onOpen} className="text-left" tabIndex={-1} data-cursor="view">
-            {project.title}
+            <ProjectTitle title={project.title} />
           </button>
         </h3>
 

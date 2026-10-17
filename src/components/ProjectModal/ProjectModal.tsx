@@ -1,3 +1,4 @@
+import { ProjectTitle } from "../ProjectTitle/ProjectTitle";
 import { ArrowLeft, ArrowRight, X } from "lucide-react";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import type { Project } from "../../data/projects";
@@ -94,8 +95,8 @@ function ProjectView({ projects, index, onNavigate, onClose }: ProjectModalProps
       <div className="project-view__details flex min-w-0 items-end justify-between gap-4 sm:gap-6">
         <div className="min-w-0 flex-1">
           {project.category && <p data-pv-item className="label mb-1 sm:mb-2">{project.category}</p>}
-          <h2 data-pv-item className="display break-words text-[clamp(1.125rem,3vw,2.75rem)] leading-tight">
-            {project.title}
+          <h2 data-pv-item className="display break-words text-[clamp(1rem,2.4vw,2.25rem)] leading-tight">
+            <ProjectTitle title={project.title} />
           </h2>
           {project.description && (
             <p data-pv-item className="mt-2 max-w-xl text-sm leading-snug text-white/80">
